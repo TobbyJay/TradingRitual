@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingRitual", "TradingRitual\TradingRitual.csproj", "{71169FD3-A634-4FD2-A2B2-E5717330C9C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingRitual.Data", "TradingRitual.Data\TradingRitual.Data.csproj", "{09E5DD0A-D9E6-43A8-840B-E2D99678A9F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingRitual.DataAccess", "TradingRitual.DataAccess\TradingRitual.DataAccess.csproj", "{9D66BF1E-0A25-44CE-A5EE-97FA38855215}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingRitual.Entities", "TradingRitual.Entities\TradingRitual.Entities.csproj", "{4225F04A-8EB1-41F9-8FCD-C94D33FFB77C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingRitual.Service", "TradingRitual.Service\TradingRitual.Service.csproj", "{B533B4ED-0C12-4959-8CA7-D4243248FC36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingRitual.DTO", "TradingRitual.DTO\TradingRitual.DTO.csproj", "{80F67EF0-AED9-4384-A1BF-E9CF94D053B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71169FD3-A634-4FD2-A2B2-E5717330C9C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71169FD3-A634-4FD2-A2B2-E5717330C9C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71169FD3-A634-4FD2-A2B2-E5717330C9C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71169FD3-A634-4FD2-A2B2-E5717330C9C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09E5DD0A-D9E6-43A8-840B-E2D99678A9F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09E5DD0A-D9E6-43A8-840B-E2D99678A9F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09E5DD0A-D9E6-43A8-840B-E2D99678A9F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09E5DD0A-D9E6-43A8-840B-E2D99678A9F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D66BF1E-0A25-44CE-A5EE-97FA38855215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D66BF1E-0A25-44CE-A5EE-97FA38855215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D66BF1E-0A25-44CE-A5EE-97FA38855215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D66BF1E-0A25-44CE-A5EE-97FA38855215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4225F04A-8EB1-41F9-8FCD-C94D33FFB77C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4225F04A-8EB1-41F9-8FCD-C94D33FFB77C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4225F04A-8EB1-41F9-8FCD-C94D33FFB77C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4225F04A-8EB1-41F9-8FCD-C94D33FFB77C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B533B4ED-0C12-4959-8CA7-D4243248FC36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B533B4ED-0C12-4959-8CA7-D4243248FC36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B533B4ED-0C12-4959-8CA7-D4243248FC36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B533B4ED-0C12-4959-8CA7-D4243248FC36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80F67EF0-AED9-4384-A1BF-E9CF94D053B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80F67EF0-AED9-4384-A1BF-E9CF94D053B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80F67EF0-AED9-4384-A1BF-E9CF94D053B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80F67EF0-AED9-4384-A1BF-E9CF94D053B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10DDD8E8-5BDA-4CBD-B3C1-D2699B5BCE80}
+	EndGlobalSection
+EndGlobal
