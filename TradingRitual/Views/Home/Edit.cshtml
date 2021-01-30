@@ -43,7 +43,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Strategy</h5>
                             <div>
-                                <form class="form-inline">
+                                <form class="form-inline checklist-form">
 
                                     <div class="col-6 ml-1 position-relative form-group">
                                         <label for="exampleEmail22" class="mr-sm-2">Name: </label>
@@ -64,54 +64,47 @@
                                         <h5 class="card-title">Checklist</h5>
                                     </div>
 
-                                    <div class="col-6 ml-1 position-relative form-group">
-                                        <input class="form-control" style="width: 100%;">
+                                    <div class="col-6 ml-1 mr-4 position-relative form-group">
+                                        <input class="form-control checklist-input" style="width: 100%;">
                                     </div>
-                                    <button class="btn btn-primary "><i class="fa fa-plus"></i></button>
+                                    <a class="btn btn-primary click-me"><i class="fa fa-plus click-me"></i></a>
                                     <div class="mt-2">
-                                        <button type="submit" class="btn btn-primary mt-2 ml-4">Submit</button>
+                                        <button type="submit" class="btn btn-primary mt-2 ml-3">Submit</button>
                                         <button type="button" class="btn btn-outline-success mt-2 ml-2" data-toggle="modal" data-target="#strategyModal">See List</button>
                                     </div>
-
 
                                     <div class="divider"></div>
                                     <hr />
                                     <div class="scroll-area-lg">
-                                        <div class="scrollbar-container ps ps--active-y">
+                                        <div class="scrollbar-container ps ps--active-y" >
                                             <div class="p-2">
-                                                <ul class="todo-list-wrapper list-group list-group-flush">
+                                                <ul id="js-todo-list" class="todo-list-wrapper list-group list-group-flush">
 
 
 
-
-                                                    <li class="list-group-item">
+                                                    @*<li class="list-group-item">
                                                         <div class="todo-indicator bg-success"></div>
                                                         <div class="widget-content p-0">
                                                             <div class="widget-content-wrapper">
-                                                                <div class="widget-content-left mr-2">
-                                                                    <div class="custom-checkbox custom-control">
-                                                                        <input type="checkbox" id="exampleCustomCheckbox3" class="custom-control-input">
-                                                                        <label class="custom-control-label" for="exampleCustomCheckbox3">&nbsp;</label>
-                                                                    </div>
+                                                                <div class="widget-content-left mr-1">
+                                                                   
                                                                 </div>
                                                                 <div class="widget-content-left flex2">
-                                                                    <div class="widget-heading">Development Task</div>
-
+                                                                    <div class="widget-heading">I will be trying a funny strategy</div>
                                                                 </div>
                                                                 <div class="widget-content-right">
 
                                                                 </div>
                                                                 <div class="widget-content-right">
-                                                                    <button class="border-0 btn-transition btn btn-outline-success">
-                                                                        <i class="fa fa-check"></i>
-                                                                    </button>
-                                                                    <button class="border-0 btn-transition btn btn-outline-danger">
-                                                                        <i class="fa fa-trash-alt"></i>
+                                                                   
+                                                                    <button type="button" class="js-delete-todo border-0 btn-transition btn btn-outline-danger ">
+
+                                                                       <i class="fa fa-trash-alt"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </li>
+                                                    </li>*@
 
                                                 </ul>
                                             </div>
@@ -155,12 +148,12 @@
                                         <h5 class="card-title">Checklist</h5>
                                     </div>
 
-                                    <div class="col-6 ml-1 position-relative form-group">
+                                    <div class="col-6 ml-1 mr-4 position-relative form-group">
                                         <input class="form-control" style="width: 100%;">
                                     </div>
-                                    <button class="btn btn-primary "><i class="fa fa-plus"></i></button>
+                                    <a class="btn btn-primary "><i class="fa fa-plus"></i></a>
                                     <div class="mt-2">
-                                        <button type="submit" class="btn btn-primary mt-2 ml-4">Submit</button>
+                                        <button type="submit" class="btn btn-primary mt-2 ml-3">Submit</button>
                                         <button type="button" class="btn btn-outline-success mt-2 ml-2" data-toggle="modal" data-target="#exitModal">See List</button>
                                     </div>
 
@@ -180,8 +173,8 @@
                                                             <div class="widget-content-wrapper">
                                                                 <div class="widget-content-left mr-2">
                                                                     <div class="custom-checkbox custom-control">
-                                                                        <input type="checkbox" id="exampleCustomCheckbox3" class="custom-control-input">
-                                                                        <label class="custom-control-label" for="exampleCustomCheckbox3">&nbsp;</label>
+                                                                        <input type="checkbox" id="exampleExitstrategyy" class="custom-control-input">
+                                                                        <label class="custom-control-label" for="exampleExitstrategyy">&nbsp;</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="widget-content-left flex2">
