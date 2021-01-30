@@ -14,6 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using TradingRitual.Data;
 using TradingRitual.DataAccess.Repository.Implementation;
+using TradingRitual.Service.Implementation;
+using TradingRitual.Service.Interface;
 
 namespace TradingRitual
 {
@@ -50,7 +52,10 @@ namespace TradingRitual
 
             }).AddEntityFrameworkStores<TradingDbContext>()
             .AddDefaultTokenProviders();
+
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped(typeof(IDataStore<>), typeof(DataStore<>));
+            
             //services.AddMvc(options => {
             //    var policy = new AuthorizationPolicyBuilder()
             //    .RequireAuthenticatedUser().Build();

@@ -53,12 +53,12 @@ namespace TradingRitual.Data
                 UserId = userId
             });
         }
-        DbSet<Profile> Profiles { get; set; }
-        DbSet<Pair> Pairs { get; set; }
-        DbSet<Strategy> Strategies { get; set; }
-        DbSet<ExitStrategy> ExitStrategies { get; set; }
-        DbSet<TradingHours> TradingHours { get; set; }
-        DbSet<Form> Forms { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Pair> Pairs { get; set; }
+        public DbSet<Strategy> Strategies { get; set; }
+        public DbSet<ExitStrategy> ExitStrategies { get; set; }
+        public DbSet<TradingHours> TradingHours { get; set; }
+        public DbSet<Form> Forms { get; set; }
 
     }
 }

@@ -1,0 +1,28 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using TradingRitual.Data;
+using TradingRitual.Entities.Models;
+using TradingRitual.Service.Interface;
+
+namespace TradingRitual.Service.Implementation
+{
+    public class UserService : IUserService
+    {
+        private readonly TradingDbContext _context;
+        public UserService(TradingDbContext context)
+        {
+            _context = context;
+        }
+        public Profile GetUserByEmail(string email)
+        {
+            var getUserName = _context.Profiles
+                  .AsNoTracking()
+                 .FirstOrDefault(p => p.Email == email);
+
+            return getUserName;
+        }
+    }
+}

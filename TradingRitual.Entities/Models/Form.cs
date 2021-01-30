@@ -14,7 +14,7 @@ namespace TradingRitual.Entities.Models
         public string AcceptanceType { get; set; } 
         public string RewardRatio { get; set; }
         public string MetDailyGoal { get; set; } 
-        public string TradeStatus { get; set; } //remember to use Enum to replace or populate/fill this
+        public string TradeStatus { get; set; } 
         public string TradeOutcome { get; set; }
         public string ExplainTrade { get; set; }
         public string Note { get; set; } 

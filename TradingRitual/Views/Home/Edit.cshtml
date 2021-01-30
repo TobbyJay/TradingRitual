@@ -1,0 +1,250 @@
+﻿@{
+    ViewData["Title"] = "Edit";
+    Layout = "_NewLayout";
+}
+
+
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div class="page-title-icon">
+                    <i class="fa fa-pen-alt text-success"></i>
+                </div>
+                <div class="ml-3">
+                    EDIT PAGE
+                    <div class="page-title-subheading">Haq haq haq haq haq haq</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--<ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a role="tab" class="nav-link active" id="tab-0" data-toggle="tab" href="#tab-content-0">
+                <span>Layout</span>
+            </a>
+        </li>-->
+    @*<li class="nav-item">
+            <a role="tab" class="nav-link" id="tab-1" data-toggle="tab" href="#tab-content-1">
+                <span>Grid</span>
+            </a>
+        </li>*@
+    <!--</ul>-->
+    <div class="tab-content">
+        <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+            <div class="row">
+
+
+                <!-- Strategy -->
+                <div class="col-sm-12 col-lg-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Strategy</h5>
+                            <div>
+                                <form class="form-inline checklist-form">
+
+                                    <div class="col-6 ml-1 position-relative form-group">
+                                        <label for="exampleEmail22" class="mr-sm-2">Name: </label>
+                                        <input class="form-control" style="
+    width: 100%;
+">
+                                    </div>
+
+                                    <div class="col-6 ml-1 mt-2 position-relative form-group">
+                                        <label for="exampleEmail22" class="mr-sm-5">Description:</label>
+                                        <textarea class="form-control"></textarea>
+                                    </div>
+
+
+
+                                    <hr />
+                                    <div class="col-6 mt-3">
+                                        <h5 class="card-title">Checklist</h5>
+                                    </div>
+
+                                    <div class="col-6 ml-1 mr-4 position-relative form-group">
+                                        <input class="form-control checklist-input" style="width: 100%;">
+                                    </div>
+                                    <a class="btn btn-primary click-me"><i class="fa fa-plus click-me"></i></a>
+                                    <div class="mt-2">
+                                        <button type="submit" class="btn btn-primary mt-2 ml-3">Submit</button>
+                                        <button type="button" class="btn btn-outline-success mt-2 ml-2" data-toggle="modal" data-target="#strategyModal">See List</button>
+                                    </div>
+
+                                    <div class="divider"></div>
+                                    <hr />
+                                    <div class="scroll-area-lg">
+                                        <div class="scrollbar-container ps ps--active-y" >
+                                            <div class="p-2">
+                                                <ul id="js-todo-list" class="todo-list-wrapper list-group list-group-flush">
+
+
+
+                                                    @*<li class="list-group-item">
+                                                        <div class="todo-indicator bg-success"></div>
+                                                        <div class="widget-content p-0">
+                                                            <div class="widget-content-wrapper">
+                                                                <div class="widget-content-left mr-1">
+                                                                   
+                                                                </div>
+                                                                <div class="widget-content-left flex2">
+                                                                    <div class="widget-heading">I will be trying a funny strategy</div>
+                                                                </div>
+                                                                <div class="widget-content-right">
+
+                                                                </div>
+                                                                <div class="widget-content-right">
+                                                                   
+                                                                    <button type="button" class="js-delete-todo border-0 btn-transition btn btn-outline-danger ">
+
+                                                                       <i class="fa fa-trash-alt"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>*@
+
+                                                </ul>
+                                            </div>
+                                            <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 400px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 232px;"></div></div>
+                                            <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 70px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 20px;"></div></div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Exit Strategy -->
+                <div class="col-sm-12 col-lg-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title"> Exit Strategy</h5>
+                            <div>
+                                <form class="form-inline">
+
+                                    <div class="col-6 ml-1 position-relative form-group">
+                                        <label for="exampleEmail22" class="mr-sm-2">Name: </label>
+                                        <input class="form-control" style="
+    width: 100%;
+">
+                                    </div>
+
+                                    <div class="col-6 ml-1 mt-2 position-relative form-group">
+                                        <label for="exampleEmail22" class="mr-sm-5">Description:</label>
+                                        <textarea class="form-control"></textarea>
+                                    </div>
+
+
+
+                                    <hr />
+                                    <div class="col-6 mt-3">
+                                        <h5 class="card-title">Checklist</h5>
+                                    </div>
+
+                                    <div class="col-6 ml-1 mr-4 position-relative form-group">
+                                        <input class="form-control" style="width: 100%;">
+                                    </div>
+                                    <a class="btn btn-primary "><i class="fa fa-plus"></i></a>
+                                    <div class="mt-2">
+                                        <button type="submit" class="btn btn-primary mt-2 ml-3">Submit</button>
+                                        <button type="button" class="btn btn-outline-success mt-2 ml-2" data-toggle="modal" data-target="#exitModal">See List</button>
+                                    </div>
+
+                                    <div class="divider"></div>
+                                    <hr />
+                                    <div class="scroll-area-lg">
+                                        <div class="scrollbar-container ps ps--active-y">
+                                            <div class="p-2">
+                                                <ul class="todo-list-wrapper list-group list-group-flush">
+
+
+
+
+                                                    <li class="list-group-item">
+                                                        <div class="todo-indicator bg-success"></div>
+                                                        <div class="widget-content p-0">
+                                                            <div class="widget-content-wrapper">
+                                                                <div class="widget-content-left mr-2">
+                                                                    <div class="custom-checkbox custom-control">
+                                                                        <input type="checkbox" id="exampleExitstrategyy" class="custom-control-input">
+                                                                        <label class="custom-control-label" for="exampleExitstrategyy">&nbsp;</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="widget-content-left flex2">
+                                                                    <div class="widget-heading">Development Task</div>
+
+                                                                </div>
+                                                                <div class="widget-content-right">
+
+                                                                </div>
+                                                                <div class="widget-content-right">
+                                                                    <button class="border-0 btn-transition btn btn-outline-success">
+                                                                        <i class="fa fa-check"></i>
+                                                                    </button>
+                                                                    <button class="border-0 btn-transition btn btn-outline-danger">
+                                                                        <i class="fa fa-trash-alt"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 400px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 232px;"></div></div>
+                                            <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 70px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 20px;"></div></div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pairs-->
+                <div class="col-sm-12 col-lg-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Pairs</h5>
+                            <div>
+                                <form class="form-inline">
+
+                                    <div class="col-6 position-relative form-group">
+                                        <label for="exampleEmail22" class="mr-sm-2">Base: </label>
+                                        <input class="form-control" style="
+    width: 100%;
+">
+                                    </div><div class="col-6 position-relative form-group">
+                                        <label for="exampleEmail22" class="mr-sm-2">Quote</label>
+                                        <input class="form-control" style="
+    width: 100%;
+">
+                                    </div>
+
+
+                                    <button class="btn btn-primary mt-3 ml-3">Submit</button>
+                                    <button type="button" class="btn btn-outline-success mt-3 ml-3" data-toggle="modal" data-target="#pairModal">See List</button>
+                                </form>
+                                <div class="divider"></div>
+                               
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
