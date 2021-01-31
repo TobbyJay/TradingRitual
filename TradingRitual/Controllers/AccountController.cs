@@ -91,7 +91,8 @@ namespace TradingRitual.Controllers
                             {
                                 FullName = model.FullName,
                                 Email = model.Email,
-                                Password = model.Password
+                                Password = model.Password,
+                                ID = userid
 
                             };
 

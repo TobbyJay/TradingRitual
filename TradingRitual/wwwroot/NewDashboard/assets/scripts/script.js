@@ -26,7 +26,7 @@ function renderTodo(todo) {
 
                 </div>
                 <div class="widget-content-left flex2">
-                        <div class="widget-heading">${todo.text}</div>
+                        <div  class="widget-heading">${todo.text}</div>
                         <label for="${todo.id}" class="tick js-tick" hidden></label> 
                 </div>
                   
@@ -106,7 +106,7 @@ list.addEventListener('click', event => {
 
     if (event.target.classList.contains('.js-delete-todo')) {
         event.preventDefault();
-        const itemKey = event.target.parentElement.dataset.key;
+        const itemKey = event.target.parentElement.parentElement;
         deleteTodo(itemKey);
         alert("delete works")
     }
