@@ -1,4 +1,5 @@
-﻿@{
+﻿@model PostEditPageViewModel
+@{
     ViewData["Title"] = "Edit";
     Layout = "_NewLayout";
 }
@@ -43,18 +44,18 @@
                         <div class="card-body">
                             <h5 class="card-title">Strategy</h5>
                             <div>
-                                <form class="form-inline checklist-form">
+                                <form class="form-inline checklist-form strategy-form">
 
                                     <div class="col-6 ml-1 position-relative form-group">
                                         <label for="exampleEmail22" class="mr-sm-2">Name: </label>
-                                        <input class="form-control" style="
-    width: 100%;
-">
+                                        <input asp-for="SimpleStrategyName" class="form-control" style="width: 100%;" required>
+                                        <span asp-validation-for="SimpleStrategyName" class="text-danger" style="font-size:smaller;"></span>
                                     </div>
 
                                     <div class="col-6 ml-1 mt-2 position-relative form-group">
                                         <label for="exampleEmail22" class="mr-sm-5">Description:</label>
-                                        <textarea class="form-control"></textarea>
+                                        <textarea asp-for="SimpleStrategyDescription" class="form-control" required></textarea>
+                                        <span asp-validation-for="SimpleStrategyDescription" class="text-danger" style="font-size:smaller;"></span>
                                     </div>
 
 
@@ -75,36 +76,36 @@
 
                                     <div class="divider"></div>
                                     <hr />
-                                    <div class="scroll-area-lg">
-                                        <div class="scrollbar-container ps ps--active-y" >
+                                    <div class="scroll-area-lg" style="height:100px;">
+                                        <div class="scrollbar-container ps ps--active-y">
                                             <div class="p-2">
                                                 <ul id="js-todo-list" class="todo-list-wrapper list-group list-group-flush">
 
 
 
                                                     @*<li class="list-group-item">
-                                                        <div class="todo-indicator bg-success"></div>
-                                                        <div class="widget-content p-0">
-                                                            <div class="widget-content-wrapper">
-                                                                <div class="widget-content-left mr-1">
-                                                                   
-                                                                </div>
-                                                                <div class="widget-content-left flex2">
-                                                                    <div class="widget-heading">I will be trying a funny strategy</div>
-                                                                </div>
-                                                                <div class="widget-content-right">
+                                                <div class="todo-indicator bg-success"></div>
+                                                <div class="widget-content p-0">
+                                                    <div class="widget-content-wrapper">
+                                                        <div class="widget-content-left mr-1">
 
-                                                                </div>
-                                                                <div class="widget-content-right">
-                                                                   
-                                                                    <button type="button" class="js-delete-todo border-0 btn-transition btn btn-outline-danger ">
-
-                                                                       <i class="fa fa-trash-alt"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
                                                         </div>
-                                                    </li>*@
+                                                        <div class="widget-content-left flex2">
+                                                            <div class="widget-heading">I will be trying a funny strategy</div>
+                                                        </div>
+                                                        <div class="widget-content-right">
+
+                                                        </div>
+                                                        <div class="widget-content-right">
+
+                                                            <button type="button" class="js-delete-todo border-0 btn-transition btn btn-outline-danger ">
+
+                                                               <i class="fa fa-trash-alt"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>*@
 
                                                 </ul>
                                             </div>
@@ -127,18 +128,18 @@
                         <div class="card-body">
                             <h5 class="card-title"> Exit Strategy</h5>
                             <div>
-                                <form class="form-inline">
+                                <form class="form-inline exit-strategy-form">
 
                                     <div class="col-6 ml-1 position-relative form-group">
-                                        <label for="exampleEmail22" class="mr-sm-2">Name: </label>
-                                        <input class="form-control" style="
-    width: 100%;
-">
+                                        <label class="mr-sm-2">Name: </label>
+                                        <input asp-for="ExitStrategyName" class="form-control" style="width: 100%;" required>
+                                        <span asp-validation-for="ExitStrategyName" class="text-danger" style="font-size:smaller;"></span>
                                     </div>
 
                                     <div class="col-6 ml-1 mt-2 position-relative form-group">
-                                        <label for="exampleEmail22" class="mr-sm-5">Description:</label>
-                                        <textarea class="form-control"></textarea>
+                                        <label class="mr-sm-5">Description:</label>
+                                        <textarea asp-for="ExitStrategyDescription" class="form-control" required></textarea>
+                                        <span asp-validation-for="ExitStrategyDescription" class="text-danger" style="font-size:smaller;"></span>
                                     </div>
 
 
@@ -159,7 +160,7 @@
 
                                     <div class="divider"></div>
                                     <hr />
-                                    <div class="scroll-area-lg">
+                                    <div class="scroll-area-lg" style="height:100px;">
                                         <div class="scrollbar-container ps ps--active-y">
                                             <div class="p-2">
                                                 <ul class="todo-list-wrapper list-group list-group-flush">
@@ -216,18 +217,17 @@
                         <div class="card-body">
                             <h5 class="card-title">Pairs</h5>
                             <div>
-                                <form class="form-inline">
+                                <form class="form-inline pairs-form">
 
                                     <div class="col-6 position-relative form-group">
-                                        <label for="exampleEmail22" class="mr-sm-2">Base: </label>
-                                        <input class="form-control" style="
-    width: 100%;
-">
-                                    </div><div class="col-6 position-relative form-group">
-                                        <label for="exampleEmail22" class="mr-sm-2">Quote</label>
-                                        <input class="form-control" style="
-    width: 100%;
-">
+                                        <label class="mr-sm-2" required>Base: </label>
+                                        <input asp-for="Base" class="form-control" style="width: 100%;" required>
+                                        <span asp-validation-for="Base" class="text-danger" style="font-size:smaller;"></span>
+                                    </div>
+                                    <div class="col-6 position-relative form-group">
+                                        <label class="mr-sm-2">Quote</label>
+                                        <input asp-for="Quote" class="form-control" style="width:100%;" required>
+                                        <span asp-validation-for="Quote" class="text-danger" style="font-size:smaller;"></span>
                                     </div>
 
 
@@ -235,7 +235,37 @@
                                     <button type="button" class="btn btn-outline-success mt-3 ml-3" data-toggle="modal" data-target="#pairModal">See List</button>
                                 </form>
                                 <div class="divider"></div>
-                               
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trading Hours-->
+                <div class="col-sm-12 col-lg-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Trading Hours</h5>
+                            <div>
+                                <form class="form-inline trade-form">
+
+                                    <div class="col-6 position-relative form-group">
+                                        <label class="mr-sm-2" required>Starting Time: </label>
+                                        <input type="time" id="StartTime" class="form-control" style="width: 100%;" required>
+                                        <span asp-validation-for="StartTime" class="text-danger" style="font-size:smaller;"></span>
+                                    </div>
+                                    <div class="col-6 position-relative form-group">
+                                        <label class="mr-sm-2">Ending Time:</label>
+                                        <input type="time" id="EndTime" class="form-control" style="width:100%;" required>
+                                        <span asp-validation-for="EndTime" class="text-danger" style="font-size:smaller;"></span>
+                                    </div>
+
+
+                                    <button class="btn btn-primary mt-3 ml-3">Submit</button>
+                                </form>
+                                <div class="divider"></div>
+
 
                             </div>
                         </div>
@@ -248,3 +278,97 @@
 </div>
 
 
+@section Scripts{
+
+    <script>
+
+        var strategyName = document.getElementById("SimpleStrategyName");
+        var exitStrategyName = document.getElementById("ExitStrategyName");
+        var desc = document.getElementById("SimpleStrategyDescription");
+        var exitDesc = document.getElementById("ExitStrategyDescription");
+        var base = document.getElementById("Base");
+        var quote = document.getElementById("Quote");
+        var start = document.getElementById("StartTime");
+        var end = document.getElementById("EndTime");
+   
+        $('.strategy-form').submit(e => {
+           
+            e.preventDefault();
+            var model = {
+                SimpleStrategyName: strategyName.value,
+                SimpleStrategyDescription: desc.value
+            }
+            console.log(model);
+            
+                $.post("PostStrategy", model, function(data, status){
+                    console.log(status);
+                    swal("Done!", "Your strategy has been created!");
+                });
+           
+
+        });
+
+            
+       
+        $('.exit-strategy-form').submit(e => {
+
+            e.preventDefault();
+            var model = {
+                ExitStrategyName: exitStrategyName.value,
+               ExitStrategyDescription: exitDesc.value
+            }
+            console.log(model);
+            
+            $.post("PostExitStrategy", model, function (data, status) {
+
+                console.log(status);
+                swal("Done!", "Your exit strategy has been created!");
+            });
+           
+
+        });
+
+
+        $('.pairs-form').submit(e => {
+
+            e.preventDefault();
+            var model = {
+                Base: base.value,
+                Quote: quote.value
+            }
+            console.log(model);
+
+            $.post("PostPairs", model, function (data, status) {
+
+                console.log(status);
+                swal("Done!", "Your Pairs have been created!");
+            });
+
+
+        });
+        $('.trade-form').submit(e => {
+
+            e.preventDefault();
+            var model = {
+                StartTime: start.value,
+                EndTime: end.value
+            }
+            console.log(model);
+
+            $.post("PostTradingHours", model, function (data, status) {
+
+                console.log(status);
+                swal("Congratulations!", "Your trading time has been set!");
+            });
+
+
+        });
+
+       
+       
+
+    </script>
+   
+
+
+}

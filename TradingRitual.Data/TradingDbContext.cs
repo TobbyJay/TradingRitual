@@ -59,6 +59,8 @@ namespace TradingRitual.Data
         public DbSet<ExitStrategy> ExitStrategies { get; set; }
         public DbSet<TradingHours> TradingHours { get; set; }
         public DbSet<Form> Forms { get; set; }
+        public DbSet<Check> CheckList { get; set; }
+
 
     }
 }
