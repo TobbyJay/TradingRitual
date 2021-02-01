@@ -1,10 +1,11 @@
 ﻿@inject SignInManager<ApplicationUser> signInManager
-@inject IDataStore<Profile> userProfile
+@inject IDataStore<Trader> userProfile
 
 @{
 
     var id = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
-    var currentUser = userProfile.GetAll().FirstOrDefault(u=>u.ID == Guid.Parse(id));
+    //var id = User.Claims.FirstOrDefault().Value;
+    var currentUser = userProfile.GetAll().FirstOrDefault(u => u.TraderId == Guid.Parse(id));
 }
 
 
@@ -16,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Analytics Dashboard - This is an example dashboard created using build-in elements and components.</title>
+   
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
     <meta name="msapplication-tap-highlight" content="no">
@@ -73,40 +74,15 @@
                     </button>
                 </span>
             </div>    <div class="app-header__content">
-                <div class="app-header-left">
-                    <div class="search-wrapper">
-                        <div class="input-holder">
-                            <input type="text" class="search-input" placeholder="Type to search">
-                            <button class="search-icon"><span></span></button>
-                        </div>
-                        <button class="close"></button>
-                    </div>
-                    <ul class="header-menu nav">
-                        <li class="nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-database"> </i>
-                                Statistics
-                            </a>
-                        </li>
-                        <li class="btn-group nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-edit"></i>
-                                Projects
-                            </a>
-                        </li>
-                        <li class="dropdown nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-cog"></i>
-                                Settings
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+
                 <div class="app-header-right">
                     <div class="header-btn-lg pr-0">
                         @if (signInManager.IsSignedIn(User))
                         {
-                            <h4><b>Hello,</b> @currentUser.FullName</h4>
+                            
+                            var checkuser = currentUser == null ? "User" : currentUser.FullName;
+                            <h4><b>Hello,</b> @checkuser</h4>
+
                         }
 
                     </div>
@@ -404,15 +380,7 @@
             <div class="app-sidebar sidebar-shadow">
                 <div class="app-header__logo">
                     <div class="logo-src"></div>
-                    <div class="header__pane ml-auto">
-                        <div>
-                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
-                                <span class="hamburger-box">
-                                    <span class="hamburger-inner"></span>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="app-header__mobile-menu">
                     <div>
@@ -443,7 +411,7 @@
                             </li>
                             <li class="app-sidebar__heading">Forms and Editing</li>
                             <li>
-                                <a asp-action="form" asp-controller="home">
+                                <a asp-action="index" asp-controller="form">
                                     <i class="fa fa-book-open"></i>
                                     Trading Forms
 
@@ -461,21 +429,21 @@
 
                             <li class="app-sidebar__heading">Analysis</li>
                             <li>
-                                <a asp-action="analysis" asp-controller="home">
+                                <a asp-action="index" asp-controller="analysis">
                                     <i class="fa fa-chart-bar"></i>
                                     Trading Analysis
                                 </a>
                             </li>
                             <li class="app-sidebar__heading">Settings</li>
-                            <li>
-                                <a href="forms-controls.html">
+                            @*<li>
+                                <a href="#">
                                     <i class="fa fa-cogs">
                                         &nbsp;
                                     </i>Profile
                                 </a>
-                            </li>
+                            </li>*@
                             <li>
-                                <a href="forms-layouts.html">
+                                <a asp-action="login" asp-controller="account">
                                     <i class="fa fa-power-off">
                                         &nbsp;
                                     </i>Logout
@@ -496,15 +464,110 @@
     </div>
     <script src="~/NewDashboard/assets/scripts/script.js"></script>
     <script src="~/NewDashboard/assets/scripts/main.js"></script>
+    <script src="~/UserDashboardStyle/assets/scripts/edit.js"></script>
     <script src="~/UserDashboardStyle/assets/scripts/main.d810cf0ae7f39f28f336.js"></script>
     @RenderSection("Scripts", required: false)
+    <script>
+        var count = 0
+        $(document).ready(function () {
+
+            productList();
+
+        });
+
+        function productGet(ctl) {
+            // Get product id from data- attribute
+            var id = $(ctl).data("id");
+
+            // Store product id in hidden field
+            $("#productid").val(id);
+
+            // Call Web API to get a Product
+            $.ajax({
+                url: "../Home/EditStrategy/" + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (strategy) {
+                    productToFields(strategy);
+
+                    // Change Update Button Text
+                    $("#updateButton").text("Update");
+                },
+                error: function (request, message, error) {
+                    handleException(request, message, error);
+                }
+            });
+        }
+
+        function productToFields(strategy) {
+            $("#strategyname").val(strategy.name);
+            $("#strategydescription").val(strategy.description);
+
+        }
+        function productList() {
+
+            $.ajax({
+                url: '../Strategy/GetStrategy',
+                type: 'GET',
+                dataType: 'json',
+                success: function (strategies) {
+                    productListSuccess(strategies);
+                },
+                error: function (request, message, error) {
+                    handleException(request, message, error);
+                }
+            });
+        }
+
+
+        // Display all strategy returned from Web API call
+        function productListSuccess(strategies) {
+            // Iterate over the collection of data
+            $.each(strategies, function (index, strategy) {
+                // Add a row to the strategy table
+                productAddRow(strategy);
+            });
+        }
+
+        // Add strategy row to <table>
+        function productAddRow(strategy) {
+            // First check if a <tbody> tag exists, add one if not
+            if ($("#strategyTable tbody").length == 0) {
+                $("#strategyTable").append("<tbody></tbody>");
+            }
+
+            // Append row to <table>
+            $("#strategyTable tbody").append(
+                productBuildTableRow(strategy));
+        }
+
+        // Build a <tr> for a row of table data
+        function productBuildTableRow(strategy) {
+
+            count++;
+            var ret = `<tr> +
+                            <td>${count}</td>
+                            <td>${strategy.name}</td>
+                            <td>${strategy.description}</td>
+                            <td><a href="../strategy/Editstrategypage/${strategy.strategyID}" class="btn btn-outline-primary">Edit</a> <button class="btn btn-outline-danger">Delete</button></td>
+                            </tr>`;
+
+
+
+            return ret;
+        }
+
+
+    </script>
+
 </body>
+
 </html>
 
 <!--ALL MODALS COME HERE { USE VIEW MODELS TO HANDLE EVERYTHING IN THE MODAL, FROM EDITING, UPDATING, READING AND DELETING }-->
-
 <!--Strategy Modal (LIST)-->
 <div class="modal fade" id="strategyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <input type="hidden" id="productid" value="0" />
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -519,7 +582,7 @@
                         <div class="main-card mb-3 card">
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
-                                <table class="mb-0 table">
+                                <table class="mb-0 table" id="strategyTable">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -530,26 +593,7 @@
 
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Sample strategy</td>
-                                            <td>I will be making use of the sample strategy</td>
-                                            <td><button class="btn btn-outline-primary" data-toggle="modal" data-target="#editStrategyModal">Edit</button> <button class="btn btn-outline-danger">Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Sample strategy 2</td>
-                                            <td>I will be making use of the sample strategy 2</td>
-                                            <td><button class="btn btn-outline-primary" data-toggle="modal" data-target="#editStrategyModal">Edit</button> <button class="btn btn-outline-danger">Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Sample strategy 3</td>
-                                            <td>I will be making use of the sample strategy 3</td>
-                                            <td><button class="btn btn-outline-primary" data-toggle="modal" data-target="#editStrategyModal">Edit</button> <button class="btn btn-outline-danger">Delete</button></td>
-                                        </tr>
-                                    </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -560,7 +604,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    
+
             </div>
         </div>
     </div>
@@ -583,7 +627,7 @@
                         <div class="main-card mb-3 card">
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
-                                <table class="mb-0 table">
+                                <table class="mb-0 table" id="exitStrategyTable">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -594,26 +638,7 @@
 
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Sample strategy</td>
-                                            <td>I will be making use of the sample strategy</td>
-                                            <td><button class="btn btn-outline-primary" data-toggle="modal" data-target="#editExitModal">Edit</button> <button class="btn btn-outline-danger" >Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Sample strategy 2</td>
-                                            <td>I will be making use of the sample strategy 2</td>
-                                            <td><button class="btn btn-outline-primary" data-toggle="modal" data-target="#editExitModal">Edit</button> <button class="btn btn-outline-danger">Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Sample strategy 3</td>
-                                            <td>I will be making use of the sample strategy 3</td>
-                                            <td><button class="btn btn-outline-primary" data-toggle="modal" data-target="#editExitModal">Edit</button> <button class="btn btn-outline-danger">Delete</button></td>
-                                        </tr>
-                                    </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -624,7 +649,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              
+
             </div>
         </div>
     </div>
@@ -648,7 +673,7 @@
                         <div class="main-card mb-3 card">
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
-                                <table class="mb-0 table">
+                                <table class="mb-0 table" id="pairTable">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -657,26 +682,7 @@
 
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>CAD/USD</td>
-                                            <td><button type="button" class="btn btn-outline-primary"  data-toggle="modal" data-target="#editPairModal"
->Edit</button> <button class="btn btn-outline-danger">Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>EUR/YEN</td>
-                                            <td><button type="button" class="btn btn-outline-primary"  data-toggle="modal" data-target="#editPairModal"
->Edit</button> <button class="btn btn-outline-danger">Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>USD/NGN</td>
-                                            <td><button type="button" class="btn btn-outline-primary"  data-toggle="modal" data-target="#editPairModal"
->Edit</button> <button class="btn btn-outline-danger">Delete</button></td>
-                                        </tr>
-                                    </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -709,16 +715,12 @@
 
                     <div class="col-6 ml-1 position-relative form-group">
                         <label class="mr-sm-2">Name: </label>
-                        <input class="form-control" style="
-    width: 100%;
-">
+                        <input class="form-control" style="width: 100%;" id="strategyname">
                     </div>
 
                     <div class="col-6 ml-1 position-relative form-group">
                         <label class="mr-sm-2">Description: </label>
-                        <input class="form-control" style="
-    width: 100%;
-">
+                        <input class="form-control" style="width: 100%;" id="strategydescription">
                     </div>
                     <div class="divider"></div>
                     <hr />
@@ -728,7 +730,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                
+
             </div>
         </div>
     </div>
@@ -769,7 +771,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-               
+
             </div>
         </div>
     </div>
@@ -804,7 +806,45 @@
 
 
                     <button type="submit" class="btn btn-primary mt-3 ml-3">Update</button>
-                   
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--ANALYSIS (VIEW)-->
+<div class="modal fade" id="viewAnalysisModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">All Pairs</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline">
+
+                    <div class="col-6 position-relative form-group">
+                        <label for="exampleEmail22" class="mr-sm-2">Base: </label>
+                        <input class="form-control" style="
+    width: 100%;
+">
+                    </div><div class="col-6 position-relative form-group">
+                        <label for="exampleEmail22" class="mr-sm-2">Quote</label>
+                        <input class="form-control" style="
+    width: 100%;
+">
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary mt-3 ml-3">Update</button>
+
                 </form>
             </div>
             <div class="modal-footer">

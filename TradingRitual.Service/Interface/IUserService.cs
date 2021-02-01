@@ -7,6 +7,7 @@ namespace TradingRitual.Service.Interface
 {
     public interface IUserService
     {
-        public Profile GetUserByEmail(string email);
+        public Trader GetUserByEmail(string email);
+     
     }
 }

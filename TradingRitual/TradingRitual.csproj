@@ -25,8 +25,4 @@
     <ProjectReference Include="..\TradingRitual.Service\TradingRitual.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\UserDashboardStyle\" />
-  </ItemGroup>
-
 </Project>

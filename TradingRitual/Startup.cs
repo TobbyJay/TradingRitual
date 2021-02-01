@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TradingRitual.Data;
 using TradingRitual.DataAccess.Repository.Implementation;
+using TradingRitual.Helpers.ContextAccessor;
 using TradingRitual.Service.Implementation;
 using TradingRitual.Service.Interface;
 
@@ -39,7 +40,6 @@ namespace TradingRitual
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
-
                 options.Password.RequiredLength = 4;
                 options.Password.RequiredUniqueChars = 0;
                 options.Password.RequireLowercase = false;
@@ -53,8 +53,16 @@ namespace TradingRitual
             }).AddEntityFrameworkStores<TradingDbContext>()
             .AddDefaultTokenProviders();
 
+            services.AddHttpContextAccessor();
+            services.AddScoped<IFormService, FormService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPairsService, PairsService>();
+            services.AddScoped<IStrategiesService, StrategiesService>();
+            services.AddScoped<IAnalysisService, AnalysisService>();
+           
+            //services.AddScoped<IFormService, FormService>();
             services.AddScoped(typeof(IDataStore<>), typeof(DataStore<>));
+            services.AddTransient<IContextAccessor, ContextAccessor>();
             
             //services.AddMvc(options => {
             //    var policy = new AuthorizationPolicyBuilder()

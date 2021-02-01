@@ -7,6 +7,8 @@ namespace TradingRitual.DTO.RequestDTOs
 {
     public class PostEditPageViewModel
     {
+        public Guid? TraderID { get; set; }
+
         ////For strategy
         [Required(ErrorMessage = "This field is required")]
         public string SimpleStrategyName { get; set; }

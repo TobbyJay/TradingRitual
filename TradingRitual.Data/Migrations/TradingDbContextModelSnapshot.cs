@@ -48,8 +48,8 @@ namespace TradingRitual.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "59763751-b087-4d7c-ab66-67051e69e999",
-                            ConcurrencyStamp = "875ea17d-6f27-4175-919d-4009d176bb11",
+                            Id = "a29d4cd0-54f4-4866-9ab5-b3189f595681",
+                            ConcurrencyStamp = "2400e2dd-397d-4fe8-a3ed-8d51145a9424",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         });
@@ -142,8 +142,8 @@ namespace TradingRitual.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "05232d9f-6430-4b3b-aaa7-9163fbdeaf3c",
-                            RoleId = "59763751-b087-4d7c-ab66-67051e69e999"
+                            UserId = "d286946a-c070-4ed4-8a0f-b0bb3994e2e3",
+                            RoleId = "a29d4cd0-54f4-4866-9ab5-b3189f595681"
                         });
                 });
 
@@ -236,18 +236,18 @@ namespace TradingRitual.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "05232d9f-6430-4b3b-aaa7-9163fbdeaf3c",
+                            Id = "d286946a-c070-4ed4-8a0f-b0bb3994e2e3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f54fbfd9-97ab-4891-9a9c-44f150faf4a0",
+                            ConcurrencyStamp = "2ceda32f-ec38-4e75-9012-688dbbfffd4c",
                             Email = "admin@tradingritual.com",
                             EmailConfirmed = true,
                             FullName = "ADMIN",
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@tradingritual.com",
                             NormalizedUserName = "admin@tradingritual.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIYpfrBbS5zUsPeuVjzQsJM2mzf9ymiVatRqEYlmupeH3d6s4Xuu5ReVdRD2poRixQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIx6m30Y6ahHeMOdUantk1zDJ8EeiPq5cdUrb0yPMd03hHC+O9B9oj0U+hVGzWM/3Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e4774f2f-d477-4b37-b025-ac43d5b04532",
+                            SecurityStamp = "981cd179-7891-4026-8296-0f64bab8b943",
                             TwoFactorEnabled = false,
                             UserName = "admin@tradingritual.com"
                         });
@@ -255,24 +255,30 @@ namespace TradingRitual.Data.Migrations
 
             modelBuilder.Entity("TradingRitual.Entities.Models.Check", b =>
                 {
-                    b.Property<Guid>("CheckID")
+                    b.Property<Guid>("CheckId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Checks")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("StrategyID")
+                    b.Property<Guid>("ExitStrategyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("CheckID");
+                    b.Property<Guid>("StrategyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TraderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CheckId");
 
                     b.ToTable("CheckList");
                 });
 
             modelBuilder.Entity("TradingRitual.Entities.Models.ExitStrategy", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("ExitStrategyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -282,14 +288,17 @@ namespace TradingRitual.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.Property<Guid>("TraderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ExitStrategyId");
 
                     b.ToTable("ExitStrategies");
                 });
 
             modelBuilder.Entity("TradingRitual.Entities.Models.Form", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("FormId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -323,11 +332,17 @@ namespace TradingRitual.Data.Migrations
                     b.Property<string>("StrategyPicked")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TimeOfTrade")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TradeOutcome")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TradeStatus")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TraderId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TradingCriteria")
                         .HasColumnType("nvarchar(max)");
@@ -335,43 +350,26 @@ namespace TradingRitual.Data.Migrations
                     b.Property<string>("TradingTrend")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("FormId");
 
                     b.ToTable("Forms");
                 });
 
             modelBuilder.Entity("TradingRitual.Entities.Models.Pair", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("PairId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Currencies")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
-
-                    b.ToTable("Pairs");
-                });
-
-            modelBuilder.Entity("TradingRitual.Entities.Models.Profile", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("TraderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("PairId");
 
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Profiles");
+                    b.ToTable("Pairs");
                 });
 
             modelBuilder.Entity("TradingRitual.Entities.Models.Strategy", b =>
@@ -386,14 +384,37 @@ namespace TradingRitual.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("TraderId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("StrategyID");
 
                     b.ToTable("Strategies");
                 });
 
+            modelBuilder.Entity("TradingRitual.Entities.Models.Trader", b =>
+                {
+                    b.Property<Guid>("TraderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TraderId");
+
+                    b.ToTable("Traders");
+                });
+
             modelBuilder.Entity("TradingRitual.Entities.Models.TradingHours", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("TradingHoursId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -403,7 +424,10 @@ namespace TradingRitual.Data.Migrations
                     b.Property<string>("StartTime")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.Property<Guid>("TraderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("TradingHoursId");
 
                     b.ToTable("TradingHours");
                 });

@@ -6,8 +6,13 @@ namespace TradingRitual.Entities.Models
 {
     public class Check
     {
-        public Guid CheckID { get; set; }
-        public Guid StrategyID { get; set; }
+        public Guid CheckId { get; set; }
+        public Guid StrategyId { get; set; }
+
+        public Guid ExitStrategyId { get; set; }
+
+        public Guid TraderId { get; set; }
+    
         public string Checks { get; set; }
 
     }

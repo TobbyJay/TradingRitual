@@ -16,9 +16,9 @@ namespace TradingRitual.Service.Implementation
         {
             _context = context;
         }
-        public Profile GetUserByEmail(string email)
+        public Trader GetUserByEmail(string email)
         {
-            var getUserName = _context.Profiles
+            var getUserName = _context.Traders
                   .AsNoTracking()
                  .FirstOrDefault(p => p.Email == email);
 

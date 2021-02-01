@@ -14,8 +14,10 @@ namespace TradingRitual.DataAccess.Repository.Implementation
          T Post(T entity);
         void Delete(T entity);
 
-     
+        T Delete(Guid id);
 
-      
+
+
+
     }
 }
