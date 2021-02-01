@@ -1,6 +1,5 @@
 ﻿@model AnalysisViewModel
 @{
-
     ViewData["Title"] = "Analysis Page";
     Layout = "_NewLayout";
 }
@@ -13,7 +12,7 @@
                 </div>
                 <div>
                     Trading Analysis
-                    <div class="page-title-subheading">Mans not hot!!</div>
+                    <div class="page-title-subheading"></div>
                 </div>
             </div>
 
@@ -33,46 +32,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @*<tr>
-            <td>12:00AM - 16:00PM</td>
-            <td>CAN/USD</td>
-            <td>Art of War</td>
-            <td><span class="text-success">Win</span></td>
-            <td> <a class="btn btn-outline-primary">Edit</a><a class="btn btn-outline-light">View</a><a class="btn btn-outline-danger">Delete</a></td>
-
-        </tr>
-        <tr>
-            <td>12:00AM - 16:00PM</td>
-            <td>CAN/USD</td>
-            <td>Art of War</td>
-            <td><span class="text-success">Win</span></td>
-            <td> <a class="btn btn-outline-primary">Edit</a><a class="btn btn-outline-light">View</a><a class="btn btn-outline-danger">Delete</a></td>
-
-        </tr>
-        <tr>
-            <td>12:00AM - 16:00PM</td>
-            <td>CAN/USD</td>
-            <td>Art of War</td>
-            <td><span class="text-danger">Lose</span></td>
-            <td> <a class="btn btn-outline-primary">Edit</a><a class="btn btn-outline-light">View</a><a class="btn btn-outline-danger">Delete</a></td>
-
-        </tr>
-        <tr>
-            <td>12:00AM - 16:00PM</td>
-            <td>CAN/USD</td>
-            <td>Art of War</td>
-            <td><span class="text-dark">Breakeven</span></td>
-            <td> <a class="btn btn-outline-primary">Edit</a><a class="btn btn-outline-light">View</a><a class="btn btn-outline-danger">Delete</a></td>
-
-        </tr>
-        <tr>
-            <td>12:00AM - 16:00PM</td>
-            <td>CAN/USD</td>
-            <td>Art of War</td>
-            <td><span class="text-warning">Missed</span></td>
-            <td> <a class="btn btn-outline-primary">Edit</a><a class="btn btn-outline-light">View</a><a class="btn btn-outline-danger">Delete</a></td>
-
-        </tr>*@
 
                     @foreach (var item in Model.FormData)
                     {
@@ -80,8 +39,8 @@
                             <td>@item.TimeOfTrade</td>
                             <td>@item.PairPicked</td>
                             <td>@item.StrategyPicked</td>
-                            <td><span class="text-warning">@item.TradeOutcome</span></td>
-                            <td> <a asp-action="editanalysis" asp-controller="analysis"asp-route-id="@item.FormId" class="btn btn-outline-primary">Edit</a><a class="btn btn-outline-light" data-toggle="modal" data-target="#viewAnalysisModal">View</a><a class="btn btn-outline-danger">Delete</a></td>
+                            <td><span class="text-warning" id="checkStatus">@item.TradeStatus</span></td>
+                            <td> <a asp-action="editanalysis" asp-controller="analysis" asp-route-id="@item.FormId" class="btn btn-outline-primary">Edit</a><a class="btn btn-outline-dark" asp-action="details" asp-controller="analysis" asp-route-id="@item.FormId">View</a><a class="btn btn-outline-danger">Delete</a></td>
                         </tr>
                     }
 

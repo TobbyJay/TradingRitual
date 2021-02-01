@@ -43,7 +43,7 @@
                                         </div>
                                         <div class="position-relative form-group">
                                             <label class="">Can you confirm this trade meets the minimum criteria of your strategy?</label>
-                                            <select asp-for="TradingCriteria" class="form-control">
+                                            <select asp-for="TradingCriteria" class="form-control" onchange="confirmTradeMeets()">
                                                 <option selected disabled>Select an option</option>
                                                 <option>Yes</option>
                                                 <option>No</option>
@@ -55,7 +55,7 @@
                                             <select class="form-control" asp-for="ExitStrategy" asp-items="@(new SelectList(ViewBag.ExitStrategies,"Name","Name"))"></select>
                                         </div>
 
-                                        <div class="position-relative form-group">
+                                        @*<div class="position-relative form-group">
                                             <label class="">Strategy checklist</label>
                                             <select name="select" class="form-control">
                                                 <option selected disabled>Select an option</option>
@@ -66,7 +66,7 @@
                                                 <option>Firth checklist </option>
 
                                             </select>
-                                        </div>
+                                        </div>*@
 
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
 
                                         <div class="position-relative form-group">
                                             <label class="">Are you trading with the trend? Try to avoid ranging markets</label>
-                                            <select asp-for="TradingTrend" class="form-control">
+                                            <select asp-for="TradingTrend" class="form-control" onchange="trend()">
                                                 <option selected disabled>Select an option</option>
                                                 <option>Yes</option>
                                                 <option>No</option>
@@ -179,7 +179,7 @@
                                     <div class="card-body">
                                         <div class="position-relative form-group">
                                             <label for="exampleEmail" class="">What is your mental state</label>
-                                            <select asp-for="MentalState" class="form-control">
+                                            <select asp-for="MentalState" class="form-control"onchange="mentalState()">
                                                 <option selected disabled>Select an option</option>
                                                 <option>Great</option>
                                                 <option>Happy</option>
@@ -196,7 +196,7 @@
                                             <label for="exampleEmail" class="">
                                                 Have you already met your Daily Goal
                                             </label>
-                                            <select asp-for="MetDailyGoal" name="select" class="form-control">
+                                            <select asp-for="MetDailyGoal" onchange="meetDailyGoal()" class="form-control">
                                                 <option selected disabled>Select an option</option>
                                                 <option>Yes</option>
                                                 <option>No</option>
@@ -451,6 +451,57 @@
 
     <script>
 
+        function mentalState() {
+            var x = document.getElementById("MentalState").value;
+            //document.getElementById("demo").innerHTML = x;
+
+            if (x == "Sad" || x == "Stressed" || x == "Revenge" || x == "Upset" || x == "Fomo/Missed a trade") {
+                //document.getElementById("demo").innerHTML = "orange was picked";
+                //x.style.Color = "red";
+                swal("Hey there!", "You shouldn't be taking this trade", "warning");
+
+            } else {
+                //document.getElementById("demo").innerHTML = "orange was not picked";
+            }
+        }
+        function trend() {
+            var x = document.getElementById("TradingTrend").value;
+           
+            if (x == "No") {
+               
+                swal("Hey there!", "You shouldn't be taking this trade", "warning");
+
+            } else {
+               
+            }
+         
+        }
+        function confirmTradeMeets() {
+            var x = document.getElementById("TradingCriteria").value;
+
+            if (x == "No") {
+
+                swal("Hey there!", "You shouldn't be taking this trade", "warning");
+
+            } else {
+
+            }
+
+        }
+
+        function meetDailyGoal() {
+            var x = document.getElementById("MetDailyGoal").value;
+
+            if (x == "No") {
+
+                swal("Hey there!", "You shouldn't be taking this trade", "warning");
+
+            } else {
+
+            }
+
+        }
+
         $(function () {
               $("#update-title-form").hide();
             $("#update-trade-form").hide();
@@ -467,7 +518,6 @@
             $("#update-trade-form").toggle();
             $("#submit-form").toggle();
 
-            alert("check me out")
         });
 
 

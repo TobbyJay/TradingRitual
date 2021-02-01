@@ -40,6 +40,33 @@ namespace TradingRitual.Controllers
         }
 
         [HttpGet]
+        public IActionResult Details(Guid id)
+        {
+            var getAnalysis = _analysisStore.GetById(id);
+          
+            var getAnalysisDetails = new FormsViewModel()
+            {
+
+                StrategyUsed = getAnalysis.StrategyPicked,
+                TradingCriteria = getAnalysis.TradingCriteria,
+                ExitStrategy = getAnalysis.ExitStrategy,
+                TradingTrend = getAnalysis.TradingTrend,
+                AcceptanceType = getAnalysis.AcceptanceType,
+                RewardRatio = getAnalysis.RewardRatio,
+                DescribeTrade = getAnalysis.DescribeTrade,
+                PairPicked = getAnalysis.PairPicked,
+                MentalState = getAnalysis.MentalState,
+                TradeStatus = getAnalysis.TradeStatus,
+                TradeOutcome = getAnalysis.TradeOutcome,
+                ExplainTrade = getAnalysis.ExplainTrade,
+                Note = getAnalysis.Note
+            };
+
+            return View(getAnalysisDetails);
+           
+        }
+
+        [HttpGet]
 
         public IActionResult EditAnalysis(Guid id)
         {

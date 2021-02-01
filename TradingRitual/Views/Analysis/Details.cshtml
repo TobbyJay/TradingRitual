@@ -1,0 +1,247 @@
+﻿@model FormsViewModel
+@{
+    ViewData["Title"] = "Analysis Details";
+    Layout = "_NewLayout";  
+}
+
+
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <i class="fa fa-book-open text-success"></i>
+                    </div>
+                    <div class="ml-3">
+                        EDIT ANALYSIS
+                        <div class="page-title-subheading"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h5 class="card-title">Strategy</h5>
+                        <div class="mt-5 collapse show" id="collapseExample123" style="">
+
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-body">
+
+
+                                        <div class="position-relative form-group">
+                                            <label class="">What strategy is this trade based on?</label>
+                                            <h3>@Model.StrategyUsed</h3>
+                                            @*<select class="form-control" asp-for="StrategyUsed" asp-items="@(new SelectList(ViewBag.Strategies,"Name","Name"))"></select>*@
+
+                                        </div>
+                                        <div class="position-relative form-group">
+                                            <label class="">Can you confirm this trade meets the minimum criteria of your strategy?</label>
+                                            <h3>@Model.TradingCriteria</h3>
+                                        </div>
+                                        <div class="position-relative form-group">
+                                            <label class="">What target/exit strategy are you using for this trade</label>
+                                            <h3>@Model.ExitStrategy</h3>
+
+                                        </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Trade form-->
+            <div class="col-md-6">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h5 class="card-title">Trade Form</h5>
+                        <div class="mt-5 collapse show" id="collapseExample1" style="">
+
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-body">
+
+                                        <div class="position-relative form-group">
+                                            <label class="">Are you trading with the trend? Try to avoid ranging markets</label>
+                                            <h3>@Model.TradingTrend</h3>
+                                        </div>
+
+
+                                        <div class="position-relative form-group">
+                                            <label class="">Do you accept you can lose this trade and promise not to move your stop loss</label>
+                                            <h3>@Model.AcceptanceType</h3>
+                                        </div>
+
+                                        <div class="position-relative form-group">
+                                            <label class="">What is the risk to reward ration on this trade</label>
+                                            <h3>@Model.RewardRatio</h3>
+                                        </div>
+
+                                        <div class="position-relative form-group">
+                                            <label class="">Why this particular trade? (Describe and include screenshot link if possible)</label>
+                                            <h3>@Model.DescribeTrade</h3>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Pair Form-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h5 class="card-title">Pair Form</h5>
+                        <div class="mt-5 collapse show" id="collapseExample12" style="">
+
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-body">
+
+                                        <div class="position-relative form-group">
+                                            <label for="exampleEmail" class="">
+                                                Which pair is this based on?
+                                            </label>
+                                            <h3>@Model.PairPicked</h3>
+
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h5 class="card-title">Mental State Form</h5>
+                        <div class="mt-5 collapse show" id="collapseExample1234" style="">
+
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-body">
+                                        <div class="position-relative form-group">
+                                            <label for="exampleEmail" class="">What is your mental state</label>
+                                            <h3>@Model.MentalState</h3>
+                                        </div>
+
+                                        <div class="position-relative form-group">
+                                            <label for="exampleEmail" class="">
+                                                Have you already met your Daily Goal
+                                            </label>
+                                            <h3>@Model.MetDailyGoal</h3>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="divider"></div>
+        <div class="mt-4 app-page-title update-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <i class="fa fa-spinner text-success"></i>
+                    </div>
+                    <div class="ml-3">
+                        UPDATE/CLOSE TRADE DETAILS
+                        <div class="page-title-subheading"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- UPDATE FORM-->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h5 class="card-title">Update/Close Trade Form Details</h5>
+                        <div class="mt-5 collapse show" id="collapseUpdate" style="">
+
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-body">
+
+                                        <div class="position-relative form-group">
+                                            <label class="">Are you trading with the trend? Try to avoid ranging markets</label>
+                                            <h3>@Model.TradeStatus</h3>
+                                        </div>
+
+
+                                        <div class="position-relative form-group">
+                                            <label class="">How much was made/lost on this trade</label>
+                                            <h3>@Model.TradeOutcome</h3>
+                                        </div>
+
+                                        <div class="position-relative form-group">
+                                            <label class="">What happened in this trade</label>
+                                            <h3>@Model.ExplainTrade</h3>
+                                        </div>
+                                        <div class="position-relative form-group">
+                                            <label class="">Notes</label>
+                                            <h3>@Model.Note</h3>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="divider"></div>
+        <div>
+
+            <a asp-action="index" asp-controller="analysis" class="btn btn-danger w-100 mb-5">Go Back</a>
+        </div>
+        <div class="divider"></div>
+    </div>
