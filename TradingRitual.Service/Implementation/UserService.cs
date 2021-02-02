@@ -12,6 +12,7 @@ namespace TradingRitual.Service.Implementation
     public class UserService : IUserService
     {
         private readonly TradingDbContext _context;
+
         public UserService(TradingDbContext context)
         {
             _context = context;

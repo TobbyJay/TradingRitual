@@ -11,6 +11,7 @@ namespace TradingRitual.DTO.ResponseDTOs
         public IQueryable<Pair> Pairs { get; set; }
         public List<Form> AnalysisDetails { get; set; }
         public IQueryable<Form> TradeWins { get; set; }
+        public IQueryable<Form> TradeLosses { get; set; }
         public IQueryable<FormsViewModel> FormDetails { get; set; }
         public TradingHours TradingHours { get; set; }
 

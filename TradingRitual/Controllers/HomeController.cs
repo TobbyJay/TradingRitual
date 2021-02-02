@@ -77,13 +77,16 @@ namespace TradingRitual.Controllers
 
             var getPairs = _pairsService.GetPairs(currentUser.TraderId);
             var getWins = _formService.GetWins(currentUser.TraderId);
-            var getLosses = _formService.GetAnalysisForDashboard(currentUser.TraderId, 1);
+            var getLosses = _formService.GetLosses(currentUser.TraderId);
+            var getMiniAnalysis = _formService.GetAnalysisForDashboard(currentUser.TraderId, 1);
 
             var dashboardDetails = new DashboardViewModel()
             {
                 Pairs = getPairs,
-                AnalysisDetails = getLosses,
-                TradeWins = getWins
+                AnalysisDetails = getMiniAnalysis,
+                TradeWins = getWins,
+                TradeLosses = getLosses,
+                
 
             };
 

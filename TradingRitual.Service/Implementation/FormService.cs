@@ -24,10 +24,16 @@ namespace TradingRitual.Service.Implementation
             return getLosses;
         }
 
+        public IQueryable<Form> GetLosses(Guid id)
+        {
+
+            var getLosses = _context.Forms.Where(p => p.TraderId == id && (p.TradeStatus == "Lose"));
+            return getLosses;
+        }
 
         public IQueryable<Form> GetWins(Guid id)
         {
-            var getWins = _context.Forms.Where(p => p.TraderId == id || p.TradeOutcome == "Win");
+            var getWins = _context.Forms.Where(p => p.TraderId == id && p.TradeStatus == "Win");
             return getWins;
         }
     }

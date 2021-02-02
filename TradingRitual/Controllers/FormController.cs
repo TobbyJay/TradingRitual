@@ -102,7 +102,7 @@ namespace TradingRitual.Controllers
                 //throw;
                // return BadRequest(new AuthResponse { Errror = "form not created" });
             }
-            return RedirectToAction("index","form");
+            return RedirectToAction("index","analysis");
 
         }
     }

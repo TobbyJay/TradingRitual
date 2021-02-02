@@ -61,7 +61,9 @@ namespace TradingRitual.Controllers
                 TradeOutcome = getAnalysis.TradeOutcome,
                 TimeOfTrade = getAnalysis.TimeOfTrade,
                 ExplainTrade = getAnalysis.ExplainTrade,
-                Note = getAnalysis.Note
+                Note = getAnalysis.Note,
+                MetDailyGoal = getAnalysis.MetDailyGoal
+                
             };
 
             return View(getAnalysisDetails);
@@ -123,7 +125,8 @@ namespace TradingRitual.Controllers
               TradeOutcome = analysis.TradeOutcome,
               ExplainTrade = analysis.ExplainTrade,
               Note = analysis.Note,
-              TimeOfTrade = analysis.TimeOfTrade
+              TimeOfTrade = analysis.TimeOfTrade,
+              MetDailyGoal =  analysis.MetDailyGoal,
             };
             return View(editForms);
         }

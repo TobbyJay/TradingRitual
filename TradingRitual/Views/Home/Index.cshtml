@@ -32,12 +32,20 @@
                     <div class="widget-subheading"></div>
                 </div>
                 <div class="widget-content-right">
-                    <div class="widget-numbers text-white"><span>@Model.Pairs.Count()</span></div>
+                    @if (Model.Pairs == null || Model.Pairs.Count() == 0)
+                    {
+                        <div class="widget-numbers text-white"><span>--</span></div>
+                    }
+                    else
+                    {
+                        <div class="widget-numbers text-white"><span>@Model.Pairs.Count()</span></div>
+                    }
+
                 </div>
             </div>
         </div>
     </div>
-    @*<div class="col-md-6 col-xl-4">
+    <div class="col-md-6 col-xl-4">
         <div class="card mb-3 widget-content bg-arielle-smile">
             <div class="widget-content-wrapper text-white">
                 <div class="widget-content-left">
@@ -46,10 +54,14 @@
                 </div>
                 <div class="widget-content-right">
                     @if (Model.TradeWins == null || Model.TradeWins.Count() == 0)
-	                {
-                    <div class="widget-numbers text-white"><span>--</span></div>
-	                }
-                    <div class="widget-numbers text-white"><span>@Model.TradeWins.Count()</span></div>
+                    {
+                        <div class="widget-numbers text-white"><span>--</span></div>
+                    }
+                    else
+                    {
+                        <div class="widget-numbers text-white"><span>@Model.TradeWins.Count()</span></div>
+                    }
+
                 </div>
             </div>
         </div>
@@ -66,11 +78,15 @@
                     {
                         <div class="widget-numbers text-white"><span>--</span></div>
                     }
-                    <div class="widget-numbers text-white"><span>@Model.TradeLosses.Count()</span></div>
+                    else
+                    {
+                        <div class="widget-numbers text-white"><span>@Model.TradeLosses.Count()</span></div>
+                    }
+
                 </div>
             </div>
         </div>
-    </div>*@
+    </div>
 
 </div>
 
@@ -106,7 +122,7 @@
                                
                             </td>
                             <td>
-                                <h4 class="text-center">No record added yet <a class="btn btn-outline-success">Add here</a></h4>
+                                <h4 class="text-center">No record added yet <a class="btn btn-outline-success" asp-action="edit" asp-controller="home">Add here</a></h4>
                             </td>
 
                         </tr>
