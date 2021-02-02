@@ -39,7 +39,7 @@
                             <td>@item.TimeOfTrade</td>
                             <td>@item.PairPicked</td>
                             <td>@item.StrategyPicked</td>
-                            <td><span id="checkStatus">@item.TradeStatus</span></td>
+                            <td><span id="status">@item.TradeStatus</span></td>
                             <td>
                                 <a asp-action="editanalysis" asp-controller="analysis" asp-route-id="@item.FormId" class="btn btn-outline-primary">Edit</a><a class="btn btn-outline-dark" asp-action="details" asp-controller="analysis" asp-route-id="@item.FormId">View</a>
                                 <a class="btn btn-outline-danger"
@@ -61,16 +61,10 @@
 
 @section Scripts{
     <script>
-        function checkStats() {
-            var check = document.getElementById("checkStatus");
-
-            if (check.textContent == "Win" || check.textContent == "win") {
-                check.style.color = "green;"
-            } else {
-                check.style.color = "red;"
-            }
-        }
-            
+        $('#status:contains("Win")').css('color', 'green');
+        $('#status:contains("Lose")').css('color', 'red');
+        $('#status:contains("Breakeven")').css('color', '#FFBF00');
+        $('#status:contains("Missed")').css('color', '#d92550');
 
     </script>
 }

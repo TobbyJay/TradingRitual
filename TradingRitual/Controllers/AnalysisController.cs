@@ -112,7 +112,7 @@ namespace TradingRitual.Controllers
 
             var editForms = new EditFormsViewModel()
             {
-              StrategyUsed = analysis.StrategyPicked,
+              StrategyPicked = analysis.StrategyPicked,
               TradingCriteria = analysis.TradingCriteria,
               ExitStrategy = analysis.ExitStrategy,
               TradingTrend = analysis.TradingTrend,

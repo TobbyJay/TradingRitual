@@ -46,7 +46,8 @@
         </div>
     </div>
     <div class="col-md-6 col-xl-4">
-        <div class="card mb-3 widget-content bg-arielle-smile">
+       
+        <div class="card mb-3 widget-content bg-grow-early">
             <div class="widget-content-wrapper text-white">
                 <div class="widget-content-left">
                     <div class="widget-heading"><h4>Total Wins</h4></div>
@@ -55,11 +56,11 @@
                 <div class="widget-content-right">
                     @if (Model.TradeWins == null || Model.TradeWins.Count() == 0)
                     {
-                        <div class="widget-numbers text-white"><span>--</span></div>
+                    <div class="widget-numbers text-white"><span>--</span></div>
                     }
                     else
                     {
-                        <div class="widget-numbers text-white"><span>@Model.TradeWins.Count()</span></div>
+                    <div class="widget-numbers text-white"><span>@Model.TradeWins.Count()</span></div>
                     }
 
                 </div>
@@ -67,7 +68,7 @@
         </div>
     </div>
     <div class="col-md-6 col-xl-4">
-        <div class="card mb-3 widget-content bg-grow-early">
+        <div class="card mb-3 widget-content bg-premium-dark">
             <div class="widget-content-wrapper text-white">
                 <div class="widget-content-left">
                     <div class="widget-heading"><h4>Total Losses</h4></div>
@@ -173,29 +174,14 @@
 
 @section Scripts{ 
     <script>
-        //function checkStats() {
 
-        //    //var cells = document.getElementById("test").getElementsByTagName("td");
-        //    //for (var i = 0; i < cells.length; i++) {
-        //    //    if (cells[i].innerHTML == "Win" || cells[i].innerHTML == "win") {
-        //    //        cells[i].style.color = "red";
-        //    //    }
-        //    //}
-        //    alert("this loads")
-        //}
-        //$(function () {
-        //    $("#table1 td").each(function () {
-        //        if ($(this).text() == 'win' || $(this).text() == 'Win') {
-        //            $(this).css('color', 'red');
-        //        }
-        //    });
-
-        //});
-       
 
               @*console.log(`@Model.TradingHours.EndTime:@Model.TradingHours.StartTime`);*@
 
-
+        $('#status:contains("Win")').css('color', 'green');
+        $('#status:contains("Lose")').css('color', 'red');
+        $('#status:contains("Breakeven")').css('color', '#FFBF00');
+        $('#status:contains("Missed")').css('color', '#d92550');
 
     </script>
 }
