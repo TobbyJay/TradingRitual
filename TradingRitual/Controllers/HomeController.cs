@@ -26,10 +26,11 @@ namespace TradingRitual.Controllers
         private readonly IUserService _userService;
         private readonly IStrategiesService _strategiesService;
         private readonly IFormService _formService;
-        private readonly IDataStore<PairController> _pairStore;
+        private readonly IDataStore<Pair> _pairStore;
         private readonly IDataStore<TradingHours> _tradeTimeStore;
         private readonly IDataStore<Trader> _traderStore;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IDataStore<Strategy> _strategyStore;
         private readonly IContextAccessor _contextAccessor;
 
         private readonly IPairsService _pairsService;
@@ -38,14 +39,14 @@ namespace TradingRitual.Controllers
             ILogger<HomeController> logger,
             IUserService userService,
             SignInManager<ApplicationUser> signInManager,
-            IDataStore<Strategy> strategyStore,
-            IDataStore<PairController> pairStore,
+
+            IDataStore<Pair> pairStore,
             IDataStore<ExitStrategy> exitStrategyStore,
             IDataStore<TradingHours> tradeTimeStore,
             IContextAccessor contextAccessor,
             IDataStore<Trader> traderStore,
             IStrategiesService strategiesService,
-            IPairsService pairsService, IFormService formService)
+            IPairsService pairsService, IFormService formService, IDataStore<Strategy> strategyStore)
         {
             _logger = logger;
             _userService = userService;
@@ -58,6 +59,7 @@ namespace TradingRitual.Controllers
             _strategiesService = strategiesService;
             _pairsService = pairsService;
             _formService = formService;
+            _strategyStore = strategyStore;
         }
 
 
@@ -102,7 +104,9 @@ namespace TradingRitual.Controllers
             return View();
         }
 
-      
+     
+
+
         /// <summary>
         /// This endpoint creates and sets trading hours
         /// </summary>

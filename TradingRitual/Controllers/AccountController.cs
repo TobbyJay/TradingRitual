@@ -178,11 +178,46 @@ namespace TradingRitual.Controllers
         }
 
 
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            var id = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
+            var currentUser = _traderDataStore.GetAll().FirstOrDefault(u => u.TraderId == Guid.Parse(id));
+          
+            ViewBag.fullName = currentUser.FullName;
+            ViewBag.email = currentUser.Email;
+           
+            return View();
+        }
+
         [HttpPost]
+        public IActionResult Profile(UpdateProfileViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var trader = new Trader
+                {
+                    FullName = model.FullName,
+                    Email = model.Email,
+                   
+                };
+
+                _traderDataStore.Update(trader);
+
+                return RedirectToAction("profile", "account");
+
+
+            }
+
+
+            return View();
+        }
+
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("index", "home");
+            return RedirectToAction("login", "account");
         }
 
 

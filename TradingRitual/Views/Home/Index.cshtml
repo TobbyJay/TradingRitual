@@ -14,12 +14,13 @@
                 </i>
             </div>
             <div>
-               Dashboard
+                Dashboard
                 <div class="page-title-subheading">
-                    
+
                 </div>
             </div>
-        </div>      
+        </div>
+        <div class="alert alert-danger fade show" id="violation-alert" role="alert" style="left: 23%;margin-top: 10px;display:none;">Hey There, you should not be trading now as this time isn't with in your trading window!</div>
     </div>
 </div>
 <div class="row">
@@ -83,7 +84,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                <table class="align-middle mb-0 table table-borderless table-striped table-hover" id="table1">
                     <thead>
                         <tr>
                             <th class="text-center">#</th>
@@ -136,8 +137,8 @@
                                 <td class="text-center">
                                     <div class="">@item.StrategyPicked</div>
                                 </td>
-                                <td class="text-center">
-                                    @item.TradeStatus
+                                <td class="text-center" id="status">
+                                   @item.TradeStatus
                                 </td>
                             </tr>
                         }
@@ -154,3 +155,31 @@
 </div>
 
 
+@section Scripts{ 
+    <script>
+        //function checkStats() {
+
+        //    //var cells = document.getElementById("test").getElementsByTagName("td");
+        //    //for (var i = 0; i < cells.length; i++) {
+        //    //    if (cells[i].innerHTML == "Win" || cells[i].innerHTML == "win") {
+        //    //        cells[i].style.color = "red";
+        //    //    }
+        //    //}
+        //    alert("this loads")
+        //}
+        //$(function () {
+        //    $("#table1 td").each(function () {
+        //        if ($(this).text() == 'win' || $(this).text() == 'Win') {
+        //            $(this).css('color', 'red');
+        //        }
+        //    });
+
+        //});
+       
+
+              @*console.log(`@Model.TradingHours.EndTime:@Model.TradingHours.StartTime`);*@
+
+
+
+    </script>
+}

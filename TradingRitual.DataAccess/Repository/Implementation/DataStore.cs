@@ -32,7 +32,9 @@ namespace TradingRitual.DataAccess.Repository.Implementation
 
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            _entities.Remove(entity);
+            _context.SaveChanges();
+           
         }
 
         public IQueryable<T> GetAll()

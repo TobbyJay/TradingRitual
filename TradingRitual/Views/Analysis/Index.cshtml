@@ -39,8 +39,15 @@
                             <td>@item.TimeOfTrade</td>
                             <td>@item.PairPicked</td>
                             <td>@item.StrategyPicked</td>
-                            <td><span class="text-warning" id="checkStatus">@item.TradeStatus</span></td>
-                            <td> <a asp-action="editanalysis" asp-controller="analysis" asp-route-id="@item.FormId" class="btn btn-outline-primary">Edit</a><a class="btn btn-outline-dark" asp-action="details" asp-controller="analysis" asp-route-id="@item.FormId">View</a><a class="btn btn-outline-danger">Delete</a></td>
+                            <td><span id="checkStatus">@item.TradeStatus</span></td>
+                            <td>
+                                <a asp-action="editanalysis" asp-controller="analysis" asp-route-id="@item.FormId" class="btn btn-outline-primary">Edit</a><a class="btn btn-outline-dark" asp-action="details" asp-controller="analysis" asp-route-id="@item.FormId">View</a>
+                                <a class="btn btn-outline-danger"
+                                   asp-action="delete"
+                                   asp-controller="analysis"
+                                   asp-route-id="@item.FormId"
+                                   onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                            </td>
                         </tr>
                     }
 
@@ -50,3 +57,20 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts{
+    <script>
+        function checkStats() {
+            var check = document.getElementById("checkStatus");
+
+            if (check.textContent == "Win" || check.textContent == "win") {
+                check.style.color = "green;"
+            } else {
+                check.style.color = "red;"
+            }
+        }
+            
+
+    </script>
+}

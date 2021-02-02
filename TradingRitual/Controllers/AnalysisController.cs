@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,7 @@ namespace TradingRitual.Controllers
                 MentalState = getAnalysis.MentalState,
                 TradeStatus = getAnalysis.TradeStatus,
                 TradeOutcome = getAnalysis.TradeOutcome,
+                TimeOfTrade = getAnalysis.TimeOfTrade,
                 ExplainTrade = getAnalysis.ExplainTrade,
                 Note = getAnalysis.Note
             };
@@ -120,7 +122,8 @@ namespace TradingRitual.Controllers
               TradeStatus = analysis.TradeStatus,
               TradeOutcome = analysis.TradeOutcome,
               ExplainTrade = analysis.ExplainTrade,
-              Note = analysis.Note
+              Note = analysis.Note,
+              TimeOfTrade = analysis.TimeOfTrade
             };
             return View(editForms);
         }
@@ -148,6 +151,7 @@ namespace TradingRitual.Controllers
                 analysis.MetDailyGoal = model.MetDailyGoal;
                 analysis.ExplainTrade = model.ExplainTrade;
                 analysis.Note = model.Note;
+                analysis.TimeOfTrade = model.TimeOfTrade;
 
                 _analysisStore.Update(analysis);
                 return RedirectToAction("index", "analysis");
@@ -155,5 +159,14 @@ namespace TradingRitual.Controllers
             return View();
         }
 
+       
+        public IActionResult Delete(Guid id)
+        {
+            var analysis = _analysisService.GetAnalysis(id);
+            _analysisStore.Delete(analysis);
+           // _analysisStore.GetById(id);
+            return RedirectToAction("index","analysis");
+
+        }
     }
 }

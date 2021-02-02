@@ -30,7 +30,7 @@
     <script src="~/UserDashboardStyle/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-<body>
+<body onload="checkStats()">
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <h4 style="
@@ -47,13 +47,7 @@
 
                 </div>
                 <div class="header__pane ml-auto">
-                    <div>
-                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
+                    
                 </div>
             </div>
             <div class="app-header__mobile-menu">
@@ -435,15 +429,15 @@
                                 </a>
                             </li>
                             <li class="app-sidebar__heading">Settings</li>
-                            @*<li>
-                                <a href="#">
-                                    <i class="fa fa-cogs">
+                            <li>
+                                <a asp-action="profile" asp-controller="account">
+                                    <i class="fa fa-user-circle">
                                         &nbsp;
                                     </i>Profile
                                 </a>
-                            </li>*@
+                            </li>
                             <li>
-                                <a asp-action="login" asp-controller="account">
+                                <a asp-action="logout" asp-controller="account">
                                     <i class="fa fa-power-off">
                                         &nbsp;
                                     </i>Logout
@@ -467,7 +461,7 @@
     <script src="~/UserDashboardStyle/assets/scripts/edit.js"></script>
     <script src="~/UserDashboardStyle/assets/scripts/main.d810cf0ae7f39f28f336.js"></script>
     @RenderSection("Scripts", required: false)
-    <script>
+<script>
         var count = 0
         $(document).ready(function () {
 
@@ -517,7 +511,10 @@
                     handleException(request, message, error);
                 }
             });
-        }
+
+         
+    }
+
 
 
         // Display all strategy returned from Web API call
@@ -549,16 +546,21 @@
                             <td>${count}</td>
                             <td>${strategy.name}</td>
                             <td>${strategy.description}</td>
-                            <td><a href="../strategy/Editstrategypage/${strategy.strategyID}" class="btn btn-outline-primary">Edit</a> <button class="btn btn-outline-danger">Delete</button></td>
+                            <td><a href="../strategy/Editstrategypage/${strategy.strategyID}" class="btn btn-outline-primary">Edit</a>
+                            <a  class="btn btn-outline-danger" 
+                               href="../strategy/delete/${strategy.strategyID}"
+                               onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                            </td>
                             </tr>`;
 
 
 
             return ret;
-        }
+    }
 
 
-    </script>
+
+</script>
 
 </body>
 

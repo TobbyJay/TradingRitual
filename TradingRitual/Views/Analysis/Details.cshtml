@@ -13,7 +13,7 @@
                         <i class="fa fa-book-open text-success"></i>
                     </div>
                     <div class="ml-3">
-                        EDIT ANALYSIS
+                        VIEW DETAILS
                         <div class="page-title-subheading"></div>
                     </div>
                 </div>
@@ -34,17 +34,17 @@
 
                                         <div class="position-relative form-group">
                                             <label class="">What strategy is this trade based on?</label>
-                                            <h3>@Model.StrategyUsed</h3>
+                                            <h5>@Model.StrategyUsed</h5>
                                             @*<select class="form-control" asp-for="StrategyUsed" asp-items="@(new SelectList(ViewBag.Strategies,"Name","Name"))"></select>*@
 
                                         </div>
                                         <div class="position-relative form-group">
                                             <label class="">Can you confirm this trade meets the minimum criteria of your strategy?</label>
-                                            <h3>@Model.TradingCriteria</h3>
+                                            <h5>@Model.TradingCriteria</h5>
                                         </div>
                                         <div class="position-relative form-group">
                                             <label class="">What target/exit strategy are you using for this trade</label>
-                                            <h3>@Model.ExitStrategy</h3>
+                                            <h5>@Model.ExitStrategy</h5>
 
                                         </div>
                                 </div>
@@ -59,7 +59,7 @@
                 </div>
 
             </div>
-
+        </div>
             <!-- Trade form-->
             <div class="col-md-6">
                 <div class="main-card mb-3 card">
@@ -73,23 +73,23 @@
 
                                         <div class="position-relative form-group">
                                             <label class="">Are you trading with the trend? Try to avoid ranging markets</label>
-                                            <h3>@Model.TradingTrend</h3>
+                                            <h5>@Model.TradingTrend</h5>
                                         </div>
 
 
                                         <div class="position-relative form-group">
                                             <label class="">Do you accept you can lose this trade and promise not to move your stop loss</label>
-                                            <h3>@Model.AcceptanceType</h3>
+                                            <h5>@Model.AcceptanceType</h5>
                                         </div>
 
                                         <div class="position-relative form-group">
                                             <label class="">What is the risk to reward ration on this trade</label>
-                                            <h3>@Model.RewardRatio</h3>
+                                            <h5>@Model.RewardRatio</h5>
                                         </div>
 
                                         <div class="position-relative form-group">
                                             <label class="">Why this particular trade? (Describe and include screenshot link if possible)</label>
-                                            <h3>@Model.DescribeTrade</h3>
+                                            <h5>@Model.DescribeTrade</h5>
                                         </div>
 
                                     </div>
@@ -106,7 +106,7 @@
 
             </div>
         </div>
-
+</div>
         <!-- Pair Form-->
         <div class="row">
             <div class="col-md-6">
@@ -123,10 +123,15 @@
                                             <label for="exampleEmail" class="">
                                                 Which pair is this based on?
                                             </label>
-                                            <h3>@Model.PairPicked</h3>
+                                            <h5>@Model.PairPicked</h5>
 
                                         </div>
-                                </div>
+
+                                        <div class="position-relative form-group">
+                                            <label class="">How much was made/lost on this trade</label>
+                                            <h5>    @Model.TimeOfTrade</h5>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -136,6 +141,7 @@
                 </div>
 
             </div>
+                </div>
             <div class="col-md-6">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
@@ -147,14 +153,14 @@
                                     <div class="card-body">
                                         <div class="position-relative form-group">
                                             <label for="exampleEmail" class="">What is your mental state</label>
-                                            <h3>@Model.MentalState</h3>
+                                            <h5>@Model.MentalState</h5>
                                         </div>
 
                                         <div class="position-relative form-group">
                                             <label for="exampleEmail" class="">
                                                 Have you already met your Daily Goal
                                             </label>
-                                            <h3>@Model.MetDailyGoal</h3>
+                                            <h5>@Model.MetDailyGoal</h5>
                                         </div>
 
                                     </div>
@@ -170,7 +176,8 @@
                 </div>
 
             </div>
-        </div>
+            </div>
+  
 
 
         <div class="divider"></div>
@@ -203,22 +210,22 @@
 
                                         <div class="position-relative form-group">
                                             <label class="">Are you trading with the trend? Try to avoid ranging markets</label>
-                                            <h3>@Model.TradeStatus</h3>
+                                            <h5>@Model.TradeStatus</h5>
                                         </div>
 
 
                                         <div class="position-relative form-group">
                                             <label class="">How much was made/lost on this trade</label>
-                                            <h3>@Model.TradeOutcome</h3>
+                                            <h5>@Model.TradeOutcome</h5>
                                         </div>
 
                                         <div class="position-relative form-group">
                                             <label class="">What happened in this trade</label>
-                                            <h3>@Model.ExplainTrade</h3>
+                                            <h5>@Model.ExplainTrade</h5>
                                         </div>
                                         <div class="position-relative form-group">
                                             <label class="">Notes</label>
-                                            <h3>@Model.Note</h3>
+                                            <h5>@Model.Note</h5>
                                         </div>
 
                                     </div>

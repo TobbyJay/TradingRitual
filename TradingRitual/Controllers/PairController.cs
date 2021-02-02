@@ -114,5 +114,15 @@ namespace TradingRitual.Controllers
 
         }
 
+        public IActionResult Delete(Guid id)
+        {
+            var pair = _pairService.GetPair(id);
+
+            _pairStore.Delete(pair);
+
+            return RedirectToAction("edit", "home");
+
+        }
+
     }
 }

@@ -225,6 +225,27 @@ namespace TradingRitual.Controllers
 
         }
 
+        public IActionResult Delete(Guid id)
+        {
+            var strategy = _strategiesService.GetStrategy(id);
+          
 
+            _strategyStore.Delete(strategy);
+         
+            return RedirectToAction("edit","home");
+
+        }
+
+        public IActionResult DeleteExitStrategy(Guid id)
+        {
+         
+            var exitStrategy = _strategiesService.GetExitStrategy(id);
+
+     
+            _exitStrategyStore.Delete(exitStrategy);
+
+            return RedirectToAction("edit", "home");
+
+        }
     }
 }

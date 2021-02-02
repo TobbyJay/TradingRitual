@@ -52,7 +52,13 @@ function exitStrategyBuildTableRow(exitStrategy) {
                     <td>${exitCount}</td>
                         <td>${exitStrategy.name}</td>
                         <td>${exitStrategy.description}</td>
-                        <td><a href="../Strategy/EditExitStrategy/${exitStrategy.exitStrategyId}" class="btn btn-outline-primary">Edit</a> <button class="btn btn-outline-danger">Delete</button></td>
+                        <td><a href="../Strategy/EditExitStrategy/${exitStrategy.exitStrategyId}" class="btn btn-outline-primary">Edit</a> 
+                        <a  class="btn btn-outline-danger" 
+                         href="../strategy/deleteexitstrategy/${exitStrategy.exitStrategyId}"
+                        onclick="return confirm('Are you sure you want to delete?')">
+                        Delete
+                        </button>
+                        </td>
                     </tr>`;
             return ret;
         }
@@ -108,7 +114,12 @@ function pairBuildTableRow(pair) {
     var ret = `<tr> +
                     <td>${pairCount}</td>
                         <td>${pair.currencies}</td>
-                        //<td><a href="../Pair/EditPairs/${pair.pairId}" class="btn btn-outline-primary">Edit</a> <button class="btn btn-outline-danger">Delete</button></td>
+                        <td><a href="../Pair/EditPairs/${pair.pairId}" class="btn btn-outline-primary">Edit</a>
+                        <a  class="btn btn-outline-danger" 
+                        href="../pair/delete/${pair.pairId}"    
+                        onclick="return confirm('Are you sure you want to delete?')">
+                        Delete
+                        </a></td>
                     </tr>`;
     return ret;
 }
