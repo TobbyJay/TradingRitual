@@ -1,0 +1,69 @@
+﻿@model UpdateProfileViewModel
+@{
+    Layout = "_NewLayout";
+    ViewData["Title"] = "Profile Page";
+
+}
+
+<div class="mt-4 app-page-title " id="update-title-form">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="fa fa-user-circle text-success"></i>
+            </div>
+            <div class="ml-3">
+                USER PROFILE PAGE
+                <div class="page-title-subheading"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--Profile Form-->
+
+
+<div class="row" id="update-trade-form">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <div class="mt-5 collapse show" id="collapseUpdate" style="">
+
+                    <div class="col-md-12">
+                        <div class="main-card mb-3 card">
+                            <div class="card-body">
+
+                                <form asp-action="profile" asp-controller="account" method="post">
+
+
+                                    <div class="position-relative form-group">
+                                        <label class="">Enter Your full name</label>
+                                        <input asp-for="FullName" value="@ViewBag.fullname" class="form-control">
+                                    </div>
+
+                                    <div class="position-relative form-group">
+                                        <label class="">Enter your email:</label>
+                                        <input asp-for="Email" value="@ViewBag.email" class="form-control">
+                                    </div>
+                                    <div class="position-relative form-group">
+                                        <label class="">Change your password:</label>
+                                        <input placeholder="leave this field empty to keep password unchanged" class="form-control">
+                                    </div>
+
+                                    <button class="btn btn-success w-100">Update Profile </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

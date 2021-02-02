@@ -1,0 +1,96 @@
+﻿@model PairsViewModel
+
+@{
+    Layout = "_NewLayout";
+}
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div class="page-title-icon">
+                    <i class="fa fa-pen-alt text-success"></i>
+                </div>
+                <div class="ml-3">
+                    EDIT PAIR
+                    <div class="page-title-subheading"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--<ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a role="tab" class="nav-link active" id="tab-0" data-toggle="tab" href="#tab-content-0">
+                <span>Layout</span>
+            </a>
+        </li>-->
+    @*<li class="nav-item">
+            <a role="tab" class="nav-link" id="tab-1" data-toggle="tab" href="#tab-content-1">
+                <span>Grid</span>
+            </a>
+        </li>*@
+    <!--</ul>-->
+    <div class="tab-content">
+        <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+            <div class="row">
+
+                <!-- Pairs-->
+                <div class="col-sm-12 col-lg-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Pairs</h5>
+                            <div>
+                                <form class="form-inline pairs-form">
+
+                                    <div class="col-6 position-relative form-group">
+                                        <label class="mr-sm-2" required>Base / Quote : </label>
+                                        <input asp-for="Currencies" class="form-control" style="width: 100%;" required>
+                                        <span asp-validation-for="Currencies" class="text-danger" style="font-size:smaller;"></span>
+                                    </div>
+
+                                    <button class="btn btn-primary mt-3 ml-3">Update</button>
+                                    <a asp-action="edit" asp-controller="home" type="button" class="btn btn-outline-success mt-3 ml-3">Go Back</a>
+                                </form>
+                                <div class="divider"></div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+
+        var currency = document.getElementById("Currencies");
+      
+
+        $('.pairs-form').submit(e => {
+
+            e.preventDefault();
+            var model = {
+                Currencies: currency.value,
+              
+            }
+            console.log(model);
+
+            $.post("../EditPairs/@ViewBag.id", model, function (data, status) {
+                console.log(data);
+                console.log(status);
+                swal("Congratulations!", "Your currency pair has been updated!", "success");
+                //location.reload(true);
+            });
+
+
+        });
+    </script>
+}

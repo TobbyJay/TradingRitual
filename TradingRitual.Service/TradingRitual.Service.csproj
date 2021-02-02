@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TradingRitual.DataAccess\TradingRitual.DataAccess.csproj" />
     <ProjectReference Include="..\TradingRitual.Data\TradingRitual.Data.csproj" />
     <ProjectReference Include="..\TradingRitual.Entities\TradingRitual.Entities.csproj" />
   </ItemGroup>

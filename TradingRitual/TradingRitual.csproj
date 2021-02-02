@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>72174849-c2f5-4bfe-8ea3-89230763f7a6</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,10 +24,6 @@
     <ProjectReference Include="..\TradingRitual.DTO\TradingRitual.DTO.csproj" />
     <ProjectReference Include="..\TradingRitual.Entities\TradingRitual.Entities.csproj" />
     <ProjectReference Include="..\TradingRitual.Service\TradingRitual.Service.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\UserDashboardStyle\" />
   </ItemGroup>
 
 </Project>

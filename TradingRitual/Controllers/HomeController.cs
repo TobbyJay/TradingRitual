@@ -15,162 +15,101 @@ using TradingRitual.DTO.RequestDTOs;
 using TradingRitual.DTO.ResponseDTOs;
 using TradingRitual.Entities.Models;
 using TradingRitual.DataAccess.Repository.Implementation;
+using TradingRitual.Helpers.ContextAccessor;
 
 namespace TradingRitual.Controllers
 {
     public class HomeController : Controller
     {
+       // private readonly Guid _TraderId;
         private readonly ILogger<HomeController> _logger;
         private readonly IUserService _userService;
-        private readonly IDataStore<Strategy> _strategyStore;
-        private readonly IDataStore<ExitStrategy> _exitStrategyStore;
+        private readonly IStrategiesService _strategiesService;
+        private readonly IFormService _formService;
         private readonly IDataStore<Pair> _pairStore;
         private readonly IDataStore<TradingHours> _tradeTimeStore;
+        private readonly IDataStore<Trader> _traderStore;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IDataStore<Strategy> _strategyStore;
+        private readonly IContextAccessor _contextAccessor;
+
+        private readonly IPairsService _pairsService;
+
         public HomeController(
             ILogger<HomeController> logger,
             IUserService userService,
             SignInManager<ApplicationUser> signInManager,
-            IDataStore<Strategy> strategyStore,
-            IDataStore<Pair> pairStore, 
-            IDataStore<ExitStrategy> exitStrategyStore, 
-            IDataStore<TradingHours> tradeTimeStore)
+
+            IDataStore<Pair> pairStore,
+            IDataStore<ExitStrategy> exitStrategyStore,
+            IDataStore<TradingHours> tradeTimeStore,
+            IContextAccessor contextAccessor,
+            IDataStore<Trader> traderStore,
+            IStrategiesService strategiesService,
+            IPairsService pairsService, IFormService formService, IDataStore<Strategy> strategyStore)
         {
             _logger = logger;
             _userService = userService;
             _signInManager = signInManager;
-            _strategyStore = strategyStore;
             _pairStore = pairStore;
-            _exitStrategyStore = exitStrategyStore;
             _tradeTimeStore = tradeTimeStore;
+            // _TraderId = contextAccessor.GetTraderId();
+
+            _traderStore = traderStore;
+            _strategiesService = strategiesService;
+            _pairsService = pairsService;
+            _formService = formService;
+            _strategyStore = strategyStore;
         }
 
 
         [HttpGet]
-        public IActionResult Analysis()
-        {
-            return View();
-        }
+    
 
         [HttpGet]
         public IActionResult Index()
-        {        
-            return View();
+
+        {
+            
+
+            var id = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
+            var currentUser = _traderStore.GetAll().FirstOrDefault(u => u.TraderId == Guid.Parse(id));
+
+            var getPairs = _pairsService.GetPairs(currentUser.TraderId);
+            var getWins = _formService.GetWins(currentUser.TraderId);
+            var getLosses = _formService.GetLosses(currentUser.TraderId);
+            var getMiniAnalysis = _formService.GetAnalysisForDashboard(currentUser.TraderId, 1);
+
+            var dashboardDetails = new DashboardViewModel()
+            {
+                Pairs = getPairs,
+                AnalysisDetails = getMiniAnalysis,
+                TradeWins = getWins,
+                TradeLosses = getLosses,
+                
+
+            };
+
+            var tenantId = currentUser.TraderId;
+            ViewBag.TraderId = tenantId;
+            return View(dashboardDetails);
         }
 
-        
-
+       
         [HttpGet]
         public IActionResult Edit()
         {
             return View();
         }
 
-        /// <summary>
-        /// This endpoint creates strategy
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult PostStrategy(PostEditPageViewModel model)
+        public IActionResult Analysis()
         {
-            if (string.IsNullOrWhiteSpace(model.SimpleStrategyName))
-            {
-                return BadRequest(new AuthResponse { Errror = "Error,Strategy did not create!" });
-            }
-
-            try
-            {
-               
-                    var createStrategy = new Strategy
-                    {
-                            Name = model.SimpleStrategyName,
-                            Description = model.SimpleStrategyDescription
-                           // CheckList = model.SimpleStrategyCheckLists                           
-                    };
-                    _strategyStore.Post(createStrategy);
-          
-            }
-            catch (Exception)
-            {
-                return BadRequest(new AuthResponse { Errror = "strategy not created" });
-                //throw;
-            }
-
-            return Ok(model);
-
+            return View();
         }
 
-        /// <summary>
-        /// This endpoint creates exit strategy
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult PostExitStrategy(PostEditPageViewModel model)
-        {
-            if (string.IsNullOrWhiteSpace(model.ExitStrategyName))
-            {
-                return BadRequest(new AuthResponse { Errror = "Error, exit Strategy did not create!" });
-            }
+     
 
-            try
-            {
 
-               
-                    var createExitStrategy = new ExitStrategy
-                    {
-                        Name = model.ExitStrategyName,
-                        Description = model.ExitStrategyDescription
-
-                    };
-                    _exitStrategyStore.Post(createExitStrategy);
-            
-
-            }
-            catch (Exception)
-            {
-                return BadRequest(new AuthResponse { Errror = " exit strategy not created" });
-                //throw;
-            }
-
-            return Ok(model);
-
-        }
-
-        /// <summary>
-        /// This endpoint creates pairs
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult PostPairs(PostEditPageViewModel model)
-        {
-            if (string.IsNullOrWhiteSpace(model.Base))
-            {
-                return BadRequest(new AuthResponse { Errror = "Error,pairs did not create!" });
-            }
-
-            try
-            {
-               
-                    var createPair = new Pair
-                    {
-                        Currencies = $"{model.Base} {model.Quote}"
-
-                    };
-                    _pairStore.Post(createPair);
-
-            }
-            catch (Exception)
-            {
-                return BadRequest(new AuthResponse { Errror = " pairs not created" });
-                //throw;
-            }
-
-            return Ok(model);
-
-        }
         /// <summary>
         /// This endpoint creates and sets trading hours
         /// </summary>
@@ -179,6 +118,9 @@ namespace TradingRitual.Controllers
         [HttpPost]
         public ActionResult PostTradingHours(PostEditPageViewModel model)
         {
+            var id = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
+            var currentUser = _traderStore.GetAll().FirstOrDefault(u => u.TraderId == Guid.Parse(id));
+
             if (string.IsNullOrWhiteSpace(model.StartTime))
             {
                 return BadRequest(new AuthResponse { Errror = "Error, trading hours not set!" });
@@ -189,8 +131,9 @@ namespace TradingRitual.Controllers
 
                 var createTradingHours = new TradingHours
                 {
-                     StartTime = model.StartTime,
-                     EndTime = model.EndTime
+                    StartTime = model.StartTime,
+                    EndTime = model.EndTime,
+                    TraderId = currentUser.TraderId
 
                 };
                 _tradeTimeStore.Post(createTradingHours);
@@ -206,41 +149,9 @@ namespace TradingRitual.Controllers
 
         }
 
-        //private AuthResponse PostExit(PostEditPageViewModel model)
-        //{
-        //    if (string.IsNullOrWhiteSpace(model.SimpleStrategyName))
-        //    {
-        //        return new AuthResponse { Errror = "Error,Exit Strategy did not create!" };
-        //    }
-
-        //    try
-        //    {              
-        //            var createExitStrategy = new ExitStrategy
-        //            {
-        //                Name = model.SimpleStrategyName,
-        //                Description = model.SimpleStrategyDescription
-        //                // CheckList = model.SimpleStrategyCheckLists
-        //            };
-        //            _exitStrategyStore.Post(createExitStrategy);
 
 
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return new AuthResponse { Errror = " Exit strategy not created" };
-        //        //throw;
-        //    }
 
-        //    return new AuthResponse { Errror = "creation successful" };
-        //}
-
-        [HttpGet]
-        public IActionResult Form()
-        {
-            return View();
-        }
-
-      
 
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         //public IActionResult Error()

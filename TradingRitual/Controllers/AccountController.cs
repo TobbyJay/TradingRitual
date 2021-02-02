@@ -18,20 +18,20 @@ namespace TradingRitual.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<AccountController> _logger;
-        private readonly IDataStore<Profile> _profileDataStore;
+        private readonly IDataStore<Trader> _traderDataStore;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager, 
             RoleManager<IdentityRole> roleManager,
             ILogger<AccountController> logger, 
-            IDataStore<Profile> profileDataStore)
+            IDataStore<Trader> traderDataStore)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _logger = logger;
-            _profileDataStore = profileDataStore;
+            _traderDataStore = traderDataStore;
         }
 
         [HttpGet]
@@ -65,7 +65,7 @@ namespace TradingRitual.Controllers
 
 
                         //check if role exists
-                        var roleExists = await _roleManager.RoleExistsAsync("Owner");
+                        var roleExists = await _roleManager.RoleExistsAsync("Trader");
 
                         IdentityResult roleResult;
 
@@ -73,13 +73,13 @@ namespace TradingRitual.Controllers
                         //else create "Owner" role and add newly registered to the role
                         if (roleExists)
                         {
-                            roleResult = await _userManager.AddToRoleAsync(user, "Owner");
+                            roleResult = await _userManager.AddToRoleAsync(user, "Trader");
 
                         }
                         else
                         {
-                            await _roleManager.CreateAsync(new IdentityRole("Owner"));
-                            roleResult = await _userManager.AddToRoleAsync(user, "Owner");
+                            await _roleManager.CreateAsync(new IdentityRole("Trader"));
+                            roleResult = await _userManager.AddToRoleAsync(user, "Trader");
                         }
 
                         if (roleResult.Succeeded)
@@ -87,29 +87,29 @@ namespace TradingRitual.Controllers
                             var userid = Guid.Parse(user.Id);
 
 
-                            var profile = new Profile()
+                            var trader = new Trader()
                             {
                                 FullName = model.FullName,
                                 Email = model.Email,
                                 Password = model.Password,
-                                ID = userid
+                                TraderId = userid
 
                             };
 
                             //add new user to Owner table
-                            var addOwner = _profileDataStore.Post(profile);
+                            var addOwner = _traderDataStore.Post(trader);
 
 
 
                             if (addOwner == null)
                             {
 
-                                await _userManager.RemoveFromRoleAsync(user, "Owner");
+                                await _userManager.RemoveFromRoleAsync(user, "Trader");
                                 await _userManager.DeleteAsync(user);
 
                             }
 
-
+                            await _signInManager.SignInAsync(user, false);
                             return RedirectToAction("index","home");
                         }
                         else
@@ -160,7 +160,7 @@ namespace TradingRitual.Controllers
                                                                           model.RememberMe, false);
                 if (user != null && result.Succeeded)
                 {
-                    if (await _userManager.IsInRoleAsync(user, "Owner"))
+                    if (await _userManager.IsInRoleAsync(user, "Trader"))
                     {
                         return RedirectToAction("index", "home");
                     }
@@ -175,6 +175,49 @@ namespace TradingRitual.Controllers
             }
 
             return View(model);
+        }
+
+
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            var id = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
+            var currentUser = _traderDataStore.GetAll().FirstOrDefault(u => u.TraderId == Guid.Parse(id));
+          
+            ViewBag.fullName = currentUser.FullName;
+            ViewBag.email = currentUser.Email;
+           
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Profile(UpdateProfileViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var trader = new Trader
+                {
+                    FullName = model.FullName,
+                    Email = model.Email,
+                   
+                };
+
+                _traderDataStore.Update(trader);
+
+                return RedirectToAction("profile", "account");
+
+
+            }
+
+
+            return View();
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("login", "account");
         }
 
 

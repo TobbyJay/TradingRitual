@@ -19,9 +19,22 @@ namespace TradingRitual.DataAccess.Repository.Implementation
 
         }
 
+        //public void Delete(T entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public void Delete(Guid id)
+        {
+            var entity =  GetById(id);
+            _entities.Remove(entity);
+        }
+
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            _entities.Remove(entity);
+            _context.SaveChanges();
+           
         }
 
         public IQueryable<T> GetAll()
@@ -48,6 +61,11 @@ namespace TradingRitual.DataAccess.Repository.Implementation
             if (_entities == null) throw new ArgumentNullException();
             _entities.Update(entity);
             _context.SaveChanges();
+        }
+
+        T IDataStore<T>.Delete(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
 

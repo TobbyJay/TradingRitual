@@ -8,9 +8,12 @@ namespace TradingRitual.Entities.Models
    public class Strategy
     {
         public Guid StrategyID { get; set; }
+        public Guid TraderId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-       
+
+        [NotMapped]
+        public List<string> ExitCheckList { get; set; }
 
     }
 }

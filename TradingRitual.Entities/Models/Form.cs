@@ -6,7 +6,9 @@ namespace TradingRitual.Entities.Models
 {
    public class Form
     {
-        public Guid ID { get; set; }     
+        public Guid FormId { get; set; }
+        public Guid TraderId { get; set; }
+     
         public string MentalState { get; set; }
         public string DescribeTrade { get; set; }
         public string TradingTrend { get; set; } 
@@ -22,10 +24,12 @@ namespace TradingRitual.Entities.Models
         public string PairPicked { get; set; } 
         public string StrategyPicked { get; set; } 
         public string ExitStrategy { get; set; }
+        public string TimeOfTrade { get; set; }
+
 
     }
 
-    enum MentalState
+    public enum MentalState
     {
         Great,
         Happy,
@@ -36,28 +40,28 @@ namespace TradingRitual.Entities.Models
         Upset,
         MissedTrade
     }
-    enum TradingTrend
+    public enum TradingTrend
     {
         Yes,
         No
     }
-    enum Criteria
+    public enum Criteria
     {
         Yes,
         No
     }
-    enum AcceptanceType
+    public enum AcceptanceType
     {
         Yes,
         No
     }
-    enum MetDailyGoal
+    public enum MetDailyGoal
     {
         Yes,
         No
     }
 
-    enum TradeStatus
+    public enum TradeStatus
     {
         Win,
         Lose,
