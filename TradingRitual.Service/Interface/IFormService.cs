@@ -11,5 +11,6 @@ namespace TradingRitual.Service.Interface
         public IQueryable<Form> GetWins(Guid id);
         public IQueryable<Form> GetLosses(Guid id);
         public List<Form> GetAnalysisForDashboard (Guid id, int page);
+     
     }
 }

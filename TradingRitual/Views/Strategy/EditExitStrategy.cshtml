@@ -1,19 +1,20 @@
 ﻿@model EditExitStrategyViewModel
-
+@inject SignInManager<ApplicationUser> signInManager
+@inject IDataStore<Trader> userProfile
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "_NewLayout";
+    var id = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
+    var currentUser = userProfile.GetAll().FirstOrDefault(u => u.TraderId == Guid.Parse(id));
 }
-
-
 
 <div class="app-main__inner">
     <div class="app-page-title">
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <i class="fa fa-pen-alt text-success"></i>
+                    <i class="fa fa-pen-square text-success"></i>
                 </div>
                 <div class="ml-3">
                     EDIT EXIT STRATEGY
@@ -96,7 +97,7 @@
             $.post("../EditExitStrategy/@ViewBag.id", model, function (data, status) {
                 console.log(data);
                 console.log(status);
-                swal("Awesome!", "Your exit strategy has been updated successfully!", "success");
+                swal("Hey @currentUser.FullName!", "Your exit strategy has been updated successfully!", "success");
                 //location.reload(true);
             });
 

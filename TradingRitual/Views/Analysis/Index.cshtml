@@ -8,7 +8,7 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <i class="fa fa-sitemap"></i>
+                    <i class="fa fa-chart-bar text-success"></i>
                 </div>
                 <div>
                     Trading Analysis
@@ -23,9 +23,10 @@
             <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>Time Of Trade</th>
+                        <th>Time Stamp</th>
                         <th>Pair</th>
                         <th>Strategy</th>
+                        <th>Amount won/lost</th>
                         <th>Trade Status</th>
                         <th></th>
 
@@ -35,20 +36,21 @@
 
                     @foreach (var item in Model.FormData)
                     {
-                        <tr>
-                            <td>@item.TimeOfTrade</td>
-                            <td>@item.PairPicked</td>
-                            <td>@item.StrategyPicked</td>
-                            <td><span id="status">@item.TradeStatus</span></td>
-                            <td>
-                                <a asp-action="editanalysis" asp-controller="analysis" asp-route-id="@item.FormId" class="btn btn-outline-primary">Edit</a><a class="btn btn-outline-dark" asp-action="details" asp-controller="analysis" asp-route-id="@item.FormId">View</a>
-                                <a class="btn btn-outline-danger"
-                                   asp-action="delete"
-                                   asp-controller="analysis"
-                                   asp-route-id="@item.FormId"
-                                   onclick="return confirm('Are you sure you want to delete?')">Delete</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>@item.TimeOfTrade</td>
+                        <td>@item.PairPicked</td>
+                        <td>@item.StrategyPicked</td>
+                        <td>@item.TradeOutcome</td>
+                        <td><span class="status">@item.TradeStatus</span></td>
+                        <td>
+                            <a asp-action="editanalysis" asp-controller="analysis" asp-route-id="@item.FormId" class="btn btn-primary">Edit</a> <a class="btn btn-dark" asp-action="details" asp-controller="analysis" asp-route-id="@item.FormId">View</a>
+                            <a class="btn btn-danger"
+                               asp-action="delete"
+                               asp-controller="analysis"
+                               asp-route-id="@item.FormId"
+                               onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                        </td>
+                    </tr>
                     }
 
                 </tbody>
@@ -61,10 +63,10 @@
 
 @section Scripts{
     <script>
-        $('#status:contains("Win")').css('color', 'green');
-        $('#status:contains("Lose")').css('color', 'red');
-        $('#status:contains("Breakeven")').css('color', '#FFBF00');
-        $('#status:contains("Missed")').css('color', '#d92550');
+        $('.status:contains("Win")').css('color', 'green');
+        $('.status:contains("Lose")').css('color', 'red');
+        $('.status:contains("Breakeven")').css('color', '#FFBF00');
+        $('.status:contains("Missed")').css('color', '#d92550');
 
     </script>
 }

@@ -16,6 +16,12 @@
     animation: spin 1000ms infinite linear;
 }
 
+.details{
+    font-size:.99rem;
+}
+.label-title{
+    font-weight:600;
+}
 @-webkit-keyframes spin {
     0% {
         -webkit-transform: rotate(0deg);
@@ -11527,7 +11533,8 @@ a, button, .btn {
 
     .app-sidebar .scrollbar-sidebar {
         z-index: 15;
-        width: 100%
+        width: 100%;
+        background: #ebeff4;
     }
 
     .app-sidebar .app-sidebar-bg {
@@ -11624,7 +11631,7 @@ a, button, .btn {
         padding: 0 1.5rem 0 45px;
         position: relative;
         border-radius: .25rem;
-        color: #343a40;
+        color: #575b61;
         white-space: nowrap;
         transition: all .2s;
         margin: .1rem 0
@@ -12088,7 +12095,8 @@ a, button, .btn {
 
     .app-main .app-main__inner {
         padding: 30px 30px 0;
-        flex: 1
+        flex: 1;
+        background: white;
     }
 
 .app-theme-white.app-container {
@@ -12104,11 +12112,11 @@ a, button, .btn {
 }
 
 .app-theme-white .app-footer .app-footer__inner, .app-theme-white .app-header {
-    background: #fafbfc
+    background: #ffffff
 }
 
 .app-theme-white.fixed-header .app-header__logo {
-    background: rgba(250,251,252,0.1)
+    background: white
 }
 
 .app-theme-gray.app-container {

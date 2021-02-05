@@ -16,7 +16,7 @@ namespace TradingRitual.DTO.ResponseDTOs
         public string RewardRatio { get; set; }
         public string MetDailyGoal { get; set; }
         public string TradeStatus { get; set; }
-        public string TradeOutcome { get; set; }
+        public int TradeOutcome { get; set; }
         public string ExplainTrade { get; set; }
         public string Note { get; set; }
         public string AmountMadeOrLost { get; set; }

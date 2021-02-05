@@ -10,7 +10,7 @@
     <div class="page-title-wrapper">
         <div class="page-title-heading">
             <div class="page-title-icon">
-                <i class="fa fa-home icon-gradient bg-mean-fruit">
+                <i class="fa fa-home text-primary">
                 </i>
             </div>
             <div>
@@ -108,6 +108,7 @@
                             <th class="text-center">Time Of Trade</th>
                             <th class="text-center">Pair</th>
                             <th class="text-center">Strategies</th>
+                            <th class="text-center">Amount won/lost</th>
                             <th class="text-center">Trade Status</th>
                         </tr>
                     </thead>
@@ -133,38 +134,41 @@
                         {
 
                             count++;
-                            <tr>
-                                <td class="text-center text-muted">@count</td>
-                                <td>
-                                    <div class="widget-content p-0">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left mr-3">
-                                                <div class="widget-content-left">
-                                                    <img width="40" class="rounded-circle" src="assets/images/avatars/4.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="widget-content-left flex2">
-                                                <div class="widget-heading">@item.TimeOfTrade</div>
-
-                                            </div>
+                    <tr>
+                        <td class="text-center text-muted">@count</td>
+                        <td>
+                            <div class="widget-content p-0">
+                                <div class="widget-content-wrapper">
+                                    <div class="widget-content-left mr-3">
+                                        <div class="widget-content-left">
+                                            <img width="40" class="rounded-circle" src="assets/images/avatars/4.jpg" alt="">
                                         </div>
                                     </div>
-                                </td>
-                                <td class="text-center">@item.PairPicked</td>
-                                <td class="text-center">
-                                    <div class="">@item.StrategyPicked</div>
-                                </td>
-                                <td class="text-center" id="status">
-                                   @item.TradeStatus
-                                </td>
-                            </tr>
+                                    <div class="widget-content-left flex2">
+                                        <div class="widget-heading">@item.TimeOfTrade</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center">@item.PairPicked</td>
+                        <td class="text-center">
+                            <div class="">@item.StrategyPicked</div>
+                        </td>
+                        <td class="text-center status">
+                            @item.TradeOutcome
+                        </td>
+                        <td class="text-center status">
+                            @item.TradeStatus
+                        </td>
+                    </tr>
                         }
 
                     </tbody>
                 </table>
             </div>
             <div class="d-block text-center card-footer">
-                <button class="mr-2 btn-icon btn-icon-only btn btn-outline-success"><i class="fa fa-arrow-alt-circle-right btn-icon-wrapper"> </i></button>
+                <button class="mr-2 btn-icon btn-icon-only btn btn-outline-success"><i class="fa fa-arrow-circle-right btn-icon-wrapper"> </i></button>
                 <a asp-action="index" asp-controller="analysis" class="btn-wide btn btn-success">View All</a>
             </div>
         </div>
@@ -178,10 +182,10 @@
 
               @*console.log(`@Model.TradingHours.EndTime:@Model.TradingHours.StartTime`);*@
 
-        $('#status:contains("Win")').css('color', 'green');
-        $('#status:contains("Lose")').css('color', 'red');
-        $('#status:contains("Breakeven")').css('color', '#FFBF00');
-        $('#status:contains("Missed")').css('color', '#d92550');
+        $('.status:contains("Win")').css('color', 'green');
+        $('.status:contains("Lose")').css('color', 'red');
+        $('.status:contains("Breakeven")').css('color', '#FFBF00');
+        $('.status:contains("Missed")').css('color', '#d92550');
 
     </script>
 }

@@ -90,12 +90,13 @@ namespace TradingRitual.Data.Migrations
                     RewardRatio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MetDailyGoal = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TradeStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TradeOutcome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TradeOutcome = table.Column<int>(type: "int", nullable: false),
                     ExplainTrade = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PairPicked = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StrategyPicked = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExitStrategy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ExitStrategy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TimeOfTrade = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -266,17 +267,17 @@ namespace TradingRitual.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "8b4d0459-c808-46df-a07d-ec29a90353c8", "99459823-4dcf-4fc5-9adb-2a8a0707196c", "ADMIN", "ADMIN" });
+                values: new object[] { "fe1044ef-c9b6-491a-9bfa-d6a0ed1c0263", "d176c73f-3724-422d-8b90-e26e7ae55702", "ADMIN", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "11f91b1d-6724-4099-ad64-679e059458d1", 0, "5a1cd28e-1b3d-426c-bde6-1e741b73710f", "admin@tradingritual.com", true, "ADMIN", false, null, "admin@tradingritual.com", "admin@tradingritual.com", "AQAAAAEAACcQAAAAEK59uLsnmiWT975VTijDkmYqjq3k6VqS8jWYkpktx9SKGGIAKuxlXSwf/bBvKWOYTQ==", null, false, "cc13cf8c-cd1a-4c50-8b1d-09e33d6e45da", false, "admin@tradingritual.com" });
+                values: new object[] { "a5243f74-152a-41b0-b44c-d5b576f4aa34", 0, "b261ceff-3b98-4e2a-b43c-5cca84b1f6b9", "admin@tradingritual.com", true, "ADMIN", false, null, "admin@tradingritual.com", "admin@tradingritual.com", "AQAAAAEAACcQAAAAEOTuX5rftwF+g5p7piI10dBZPImP5s71eM62yajfac4Mmiile02dnbrPBpQnOTkzqA==", null, false, "eeefce53-1795-4c5b-9391-772ee04adb5e", false, "admin@tradingritual.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "8b4d0459-c808-46df-a07d-ec29a90353c8", "11f91b1d-6724-4099-ad64-679e059458d1" });
+                values: new object[] { "fe1044ef-c9b6-491a-9bfa-d6a0ed1c0263", "a5243f74-152a-41b0-b44c-d5b576f4aa34" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

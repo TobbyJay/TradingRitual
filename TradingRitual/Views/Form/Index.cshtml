@@ -1,8 +1,14 @@
 ﻿
 @model FormsViewModel
+@inject SignInManager<ApplicationUser> signInManager
+@inject IDataStore<Trader> userProfile
+
 @{
     Layout = "_NewLayout";
     ViewData["Title"] = "Form Page";
+
+    var id = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
+    var currentUser = userProfile.GetAll().FirstOrDefault(u => u.TraderId == Guid.Parse(id));
 
 }
 <form class="analysis-form" asp-action="PostForm" asp-controller="Form" method="post">
@@ -14,7 +20,7 @@
             <div class="page-title-wrapper">
                 <div class="page-title-heading">
                     <div class="page-title-icon">
-                        <i class="fa fa-book-open text-success"></i>
+                        <i class="fa fa-book text-success"></i>
                     </div>
                     <div class="ml-3">
                         TRADING FORM
@@ -28,13 +34,93 @@
             <div class="col-md-6">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
-                        <h5 class="card-title">Strategy</h5>
+                        <h5 class="card-title">Pre-trade Check Form</h5>
                         <div class="mt-5 collapse show" id="collapseExample123" style="">
 
                             <div class="col-md-12">
                                 <div class="main-card mb-3 card">
                                     <div class="card-body">
 
+
+                                        <div class="position-relative form-group">
+                                            <label for="exampleEmail" class="">What is your mental state</label>
+                                            <select asp-for="MentalState" class="form-control" onchange="mentalState()">
+                                                <option selected disabled>Select an option</option>
+                                                <option>Great</option>
+                                                <option>Happy</option>
+                                                <option>Okay</option>
+                                                <option>Sad</option>
+                                                <option>Stressed</option>
+                                                <option>Revenge</option>
+                                                <option>Upset</option>
+                                                <option>Fomo/Missed a trade</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="position-relative form-group">
+                                            <label for="exampleEmail" class="">
+                                                Have you already met your Daily Goal
+                                            </label>
+                                            <select asp-for="MetDailyGoal" onchange="meetDailyGoal()" class="form-control">
+                                                <option selected disabled>Select an option</option>
+                                                <option>Yes</option>
+                                                <option>No</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="position-relative form-group">
+                                            <label for="exampleEmail" class="">
+                                                Which pair is this based on?
+                                            </label>
+                                            <select class="form-control" asp-for="PairPicked" asp-items="@(new SelectList(ViewBag.Pair,"Currencies","Currencies"))"></select>
+                                        </div>
+
+
+                                        <div class="position-relative form-group">
+                                            <label class="">Do you accept you can lose this trade and promise not to move your stop loss</label>
+                                            <select asp-for="AcceptanceType" class="form-control" onchange="accept()">
+                                                <option selected disabled>Select an option</option>
+                                                <option>Yes</option>
+                                                <option>No</option>
+                                            </select>
+                                        </div>
+                                        @*<div class="position-relative form-group">
+                                                <label class="">Strategy checklist</label>
+                                                <select name="select" class="form-control">
+                                                    <option selected disabled>Select an option</option>
+                                                    <option>checklist 1</option>
+                                                    <option>checklist 2</option>
+                                                    <option>3 checklist</option>
+                                                    <option>4 checklist</option>
+                                                    <option>Firth checklist </option>
+
+                                                </select>
+                                            </div>*@
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Strategy form-->
+            <div class="col-md-6">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h5 class="card-title">Strategy Form</h5>
+                        <div class="mt-5 collapse show" id="collapseExample1" style="">
+
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-body">
 
                                         <div class="position-relative form-group">
                                             <label class="">What strategy is this trade based on?</label>
@@ -54,45 +140,6 @@
                                             <label class="">What target/exit strategy are you using for this trade</label>
                                             <select class="form-control" asp-for="ExitStrategy" asp-items="@(new SelectList(ViewBag.ExitStrategies,"Name","Name"))"></select>
                                         </div>
-
-                                        @*<div class="position-relative form-group">
-                                            <label class="">Strategy checklist</label>
-                                            <select name="select" class="form-control">
-                                                <option selected disabled>Select an option</option>
-                                                <option>checklist 1</option>
-                                                <option>checklist 2</option>
-                                                <option>3 checklist</option>
-                                                <option>4 checklist</option>
-                                                <option>Firth checklist </option>
-
-                                            </select>
-                                        </div>*@
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="card-footer">
-
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Trade form-->
-            <div class="col-md-6">
-                <div class="main-card mb-3 card">
-                    <div class="card-body">
-                        <h5 class="card-title">Trade Form</h5>
-                        <div class="mt-5 collapse show" id="collapseExample1" style="">
-
-                            <div class="col-md-12">
-                                <div class="main-card mb-3 card">
-                                    <div class="card-body">
-
                                         <div class="position-relative form-group">
                                             <label class="">Are you trading with the trend? Try to avoid ranging markets</label>
                                             <select asp-for="TradingTrend" class="form-control" onchange="trend()">
@@ -102,15 +149,6 @@
                                             </select>
                                         </div>
 
-
-                                        <div class="position-relative form-group">
-                                            <label class="">Do you accept you can lose this trade and promise not to move your stop loss</label>
-                                            <select asp-for="AcceptanceType" class="form-control">
-                                                <option selected disabled>Select an option</option>
-                                                <option>Yes</option>
-                                                <option>No</option>
-                                            </select>
-                                        </div>
 
                                         <div class="position-relative form-group">
                                             <label class="">What is the risk to reward ration on this trade</label>
@@ -137,234 +175,19 @@
             </div>
         </div>
 
-        <!-- Pair Form-->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="main-card mb-3 card">
-                    <div class="card-body">
-                        <h5 class="card-title">Pairs and Timing Form</h5>
-                        <div class="mt-5 collapse show" id="collapseExample12" style="">
-
-                            <div class="col-md-12">
-                                <div class="main-card mb-3 card">
-                                    <div class="card-body">
-
-                                        <div class="position-relative form-group">
-                                            <label for="exampleEmail" class="">
-                                                Which pair is this based on?
-                                            </label>
-                                            <select class="form-control" asp-for="PairPicked" asp-items="@(new SelectList(ViewBag.Pair,"Currencies","Currencies"))"></select>
-                                        </div>
-
-                                        <div class="position-relative form-group">
-                                            <label class="">What date and time did this trade take place</label>
-                                            <input type="datetime-local" asp-for="TimeOfTrade" class="form-control">
-                                        </div>
 
 
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-md-6">
-                <div class="main-card mb-3 card">
-                    <div class="card-body">
-                        <h5 class="card-title">Mental State Form</h5>
-                        <div class="mt-5 collapse show" id="collapseExample1234" style="">
-
-                            <div class="col-md-12">
-                                <div class="main-card mb-3 card">
-                                    <div class="card-body">
-                                        <div class="position-relative form-group">
-                                            <label for="exampleEmail" class="">What is your mental state</label>
-                                            <select asp-for="MentalState" class="form-control"onchange="mentalState()">
-                                                <option selected disabled>Select an option</option>
-                                                <option>Great</option>
-                                                <option>Happy</option>
-                                                <option>Okay</option>
-                                                <option>Sad</option>
-                                                <option>Stressed</option>
-                                                <option>Revenge</option>
-                                                <option>Upset</option>
-                                                <option>Fomo/Missed a trade</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="position-relative form-group">
-                                            <label for="exampleEmail" class="">
-                                                Have you already met your Daily Goal
-                                            </label>
-                                            <select asp-for="MetDailyGoal" onchange="meetDailyGoal()" class="form-control">
-                                                <option selected disabled>Select an option</option>
-                                                <option>Yes</option>
-                                                <option>No</option>
-                                            </select>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="card-footer">
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="divider"></div>
-        <div>
-
-            <a class="btn btn-success w-100 mb-5" id="next-btn">Next</a>
-
-        </div>
-        <div class="divider"></div>
-
-        <div class="divider"></div>
-        <div class="mt-4 app-page-title " id="update-title-form">
-            <div class="page-title-wrapper">
-                <div class="page-title-heading">
-                    <div class="page-title-icon">
-                        <i class="fa fa-spinner text-success"></i>
-                    </div>
-                    <div class="ml-3">
-                        UPDATE/CLOSE TRADE
-                        <div class="page-title-subheading"></div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!-- UPDATE FORM-->
-
-        <div class="row" id="update-trade-form">
-            <div class="col-md-12">
-                <div class="main-card mb-3 card">
-                    <div class="card-body">
-                        <h5 class="card-title">Update/Close Trade Form</h5>
-                        <div class="mt-5 collapse show" id="collapseUpdate" style="">
-
-                            <div class="col-md-12">
-                                <div class="main-card mb-3 card">
-                                    <div class="card-body">
-
-                                        <div class="position-relative form-group">
-                                            <label class="">Are you trading with the trend? Try to avoid ranging markets</label>
-                                            <select asp-for="TradeStatus" class="form-control">
-                                                <option selected disabled>Select an option</option>
-                                                <option>Win</option>
-                                                <option>Lose</option>
-                                                <option>Breakeven</option>
-                                                <option>Missed</option>
-                                            </select>
-                                        </div>
-
-
-                                        <div class="position-relative form-group">
-                                            <label class="">How much was made/lost on this trade</label>
-                                            <input asp-for="TradeOutcome" class="form-control">
-                                        </div>
-
-                                        <div class="position-relative form-group">
-                                            <label class="">What happened in this trade</label>
-                                            <textarea asp-for="ExplainTrade" class="form-control"></textarea>
-                                        </div>
-                                        <div class="position-relative form-group">
-                                            <label class="">Notes</label>
-                                            <input asp-for="Note" class="form-control">
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="card-footer">
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="divider"></div>
         <div>
 
             <button class="btn btn-success w-100 mb-5" id="submit-form">Submit</button>
 
         </div>
+
         <div class="divider"></div>
-        <div class="divider"></div>
-        <div class="divider"></div>
-        <!-- Update/close trade form-->
-        <!--<div class="col-md-12 update-form">
-        <div class="main-card mb-3 card">
-            <div class="card-body">
-                <h5 class="card-title">Update/Close Trade Form</h5>
-                <div class="mt-5 collapse show" id="collapseUpdate" style="">
-
-                    <div class="col-md-12">
-                        <div class="main-card mb-3 card">
-                            <div class="card-body">
-
-                                <div class="position-relative form-group">
-                                    <label class="">Are you trading with the trend? Try to avoid ranging markets</label>
-                                    <select asp-for="TradeStatus" class="form-control">
-                                        <option selected disabled>Select an option</option>
-                                        <option>Win</option>
-                                        <option>Lose</option>
-                                        <option>Breakeven</option>
-                                        <option>Missed</option>
-                                    </select>
-                                </div>
 
 
-                                <div class="position-relative form-group">
-                                    <label class="">How much was made/lost on this trade</label>
-                                    <input asp-for="TradeOutcome" class="form-control">
-                                </div>
-
-                                <div class="position-relative form-group">
-                                    <label class="">What happened in this trade</label>
-                                    <textarea asp-for="ExplainTrade" class="form-control"></textarea>
-                                </div>
-                                <div class="position-relative form-group">
-                                    <label class="">Notes</label>
-                                    <input asp-for="Note" class="form-control">
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="card-footer">
-
-            </div>
-        </div>
-
-    </div>-->
     </div>
-
-
 
 </form>
 
@@ -372,124 +195,34 @@
 
 @section Scripts{
 
-    @*<script>
-
-            var StrategyUsed = document.getElementById("StrategyUsed");
-            var TradingCriteria = document.getElementById("TradingCriteria");
-            var ExitStrategy = document.getElementById("ExitStrategy");
-            var TradingTrend = document.getElementById("TradingTrend");
-            var AcceptanceType = document.getElementById("AcceptanceType");
-            var RewardRatio = document.getElementById("RewardRatio");
-            var DescribeTrade = document.getElementById("DescribeTrade");
-            var PairPicked = document.getElementById("PairPicked");
-            var MentalState = document.getElementById("MentalState");
-            var MetDailyGoal = document.getElementById("MetDailyGoal");
-            var TradeStatus = document.getElementById("TradeStatus");
-            var TradeOutcome = document.getElementById("TradeOutcome");
-            var ExplainTrade = document.getElementById("ExplainTrade");
-            var Note = document.getElementById("Note");
-
-
-            $('#tradeing-form').submit(e => {
-            debugger
-                e.preventDefault();
-                var model = {
-                    StrategyUsed: StrategyUsed.value,
-                    TradingCriteria: TradingCriteria.value,
-                    ExitStrategy: ExitStrategy.value,
-                    TradingTrend: TradingTrend.value,
-                    AcceptanceType: AcceptanceType.value,
-                    RewardRatio: RewardRatio.value,
-                    DescribeTrade: DescribeTrade.value,
-                    PairPicked: PairPicked.value,
-                    MentalState: MentalState.value,
-                    MetDailyGoal: PairPicked.value,
-                    TradeStatus: TradeStatus.value,
-                    TradeOutcome: TradeOutcome.value,
-                    ExplainTrade: ExplainTrade.value,
-                    Note = Note.value
-                }
-                console.log(model);
-                debugger
-                $.ajax({
-                    method: "Post",
-                    url: "api/Forms/Submit",
-                    data: model,
-                    dataType: "application/json",
-                    success: function (resp) {
-                        console.log(resp)
-                    },
-                    error: function (resp) {
-
-                        alert("Failed")
-                    }
-                })
-                //$.post("PostForm", model, function (data, status) {
-                //    console.log(data);
-                //    console.log(status);
-
-                //    swal("Good job!", "Your form has been created successfully, check the update form below", "success");
-
-                //   // location.reload(true);
-                //});
-            });
-
-
-            //$("#next-btn").click(e => {
-            //    e.preventDefault();
-
-            //    $("#update-title-form").toggle();
-            //    $("#update-trade-form").toggle();
-            //    $("#submit-form").toggle();
-            //});
-
-            $(function () {
-              //  $("#update-title-form").hide();
-                //$("#update-trade-form").hide();
-                //$("#submit-form").hide();
-
-                alert("Hello From here")
-
-            });
-
-
-        </script>*@
 
     <script>
 
         function mentalState() {
             var x = document.getElementById("MentalState").value;
-            //document.getElementById("demo").innerHTML = x;
 
             if (x == "Sad" || x == "Stressed" || x == "Revenge" || x == "Upset" || x == "Fomo/Missed a trade") {
-                //document.getElementById("demo").innerHTML = "orange was picked";
-                //x.style.Color = "red";
-                swal("Hey there!", "You shouldn't be taking this trade", "warning");
 
-            } else {
-                //document.getElementById("demo").innerHTML = "orange was not picked";
+                swal("Hey @currentUser.FullName!", "You shouldn't be taking this trade", "warning");
+
             }
         }
         function trend() {
             var x = document.getElementById("TradingTrend").value;
-           
-            if (x == "No") {
-               
-                swal("Hey there!", "You shouldn't be taking this trade", "warning");
 
-            } else {
-               
+            if (x == "No") {
+
+                swal("Hey @currentUser.FullName!", "You shouldn't be taking this trade", "warning");
+
             }
-         
+
         }
         function confirmTradeMeets() {
             var x = document.getElementById("TradingCriteria").value;
 
             if (x == "No") {
 
-                swal("Hey there!", "You shouldn't be taking this trade", "warning");
-
-            } else {
+                swal("Hey @currentUser.FullName!", "You shouldn't be taking this trade", "warning");
 
             }
 
@@ -498,37 +231,24 @@
         function meetDailyGoal() {
             var x = document.getElementById("MetDailyGoal").value;
 
-            if (x == "No") {
+            if (x == "Yes") {
 
-                swal("Hey there!", "You shouldn't be taking this trade", "warning");
-
-            } else {
+                swal("Hey @currentUser.FullName!", "You shouldn't be taking this trade", "warning");
 
             }
-
         }
 
-        $(function () {
-              $("#update-title-form").hide();
-            $("#update-trade-form").hide();
-            $("#submit-form").hide();
+        function accept() {
+            var x = document.getElementById("AcceptanceType").value;
 
-            //alert("Hello From here")
+            if (x == "No") {
 
-        });
+                swal("Hey @currentUser.FullName!", "You shouldn't be taking this trade", "warning");
 
-        $("#next-btn").click(e => {
-            e.preventDefault();
+            }
+        }
 
-            $("#update-title-form").toggle();
-            $("#update-trade-form").toggle();
-            $("#submit-form").toggle();
-
-        });
-
-
-       
-
+            
     </script>
 
 

@@ -1,9 +1,12 @@
 ﻿@model EdiStrategyViewModel
-
+@inject SignInManager<ApplicationUser> signInManager
+@inject IDataStore<Trader> userProfile
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "_NewLayout";
+    var id = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
+    var currentUser = userProfile.GetAll().FirstOrDefault(u => u.TraderId == Guid.Parse(id));
 }
 
 
@@ -13,7 +16,7 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <i class="fa fa-pen-alt text-success"></i>
+                    <i class="fa fa-pen-square text-success"></i>
                 </div>
                 <div class="ml-3">
                     EDIT STRATEGY
@@ -75,16 +78,7 @@
 
         var strat = document.getElementById("SimpleStrategyName");
         var desc = document.getElementById("SimpleStrategyDescription");
-        //$(document).ready(function () {
-
-        //    alert("this loads");
-        //    //$.get("GetStrategy", function (data, status) {
-
-        //    //    console.log(status);
-        //    //    //swal("Congratulations!", "Your trading time has been set!");
-        //    //});
-        //});
-
+       
         $('.edit-strategy-form').submit(e => {
 
             e.preventDefault();
@@ -97,7 +91,7 @@
             $.post("../Editstrategypage/@ViewBag.id", model, function (data, status) {
                 console.log(data);
                 console.log(status);
-                swal("Awesome!", "Your strategy has been updated successfully!", "success");
+                swal("Hey @currentUser.FullName!", "Your strategy has been updated successfully!", "success");
                 //location.reload(true);
             });
 

@@ -8,7 +8,6 @@
     var currentUser = userProfile.GetAll().FirstOrDefault(u => u.TraderId == Guid.Parse(id));
 }
 
-
 <!doctype html>
 <html lang="en">
 
@@ -17,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   
+
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
     <meta name="msapplication-tap-highlight" content="no">
@@ -25,20 +24,21 @@
     <title>@ViewBag.Title</title>
     <link href="~/NewDashboard/css/main.css" rel="stylesheet" />
     <link href="~/NewDashboard/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="~/UserDashboardStyle/lib/jquery/dist/jquery.js"></script>
     <script src="~/UserDashboardStyle/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/UserDashboardStyle/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 <body onload="checkStats()">
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
-            <h4 style="
-    text-align: center;
-    margin-left: 25px;
-    font-weight:600;
-
-">
+            <h4 style="        text-align: center;
+        margin-left: 25px;
+        font-weight: 600;
+        color: black;
+  ">
                 TRADING RITUAL
             </h4>
             <div class="app-header__logo">
@@ -47,7 +47,7 @@
 
                 </div>
                 <div class="header__pane ml-auto">
-                    
+
                 </div>
             </div>
             <div class="app-header__mobile-menu">
@@ -73,9 +73,9 @@
                     <div class="header-btn-lg pr-0">
                         @if (signInManager.IsSignedIn(User))
                         {
-                            
+
                             var checkuser = currentUser == null ? "User" : currentUser.FullName;
-                            <h4><b>Hello,</b> @checkuser</h4>
+                            <h4 style="color: black;"><b>Hello,</b> @checkuser</h4>
 
                         }
 
@@ -415,7 +415,7 @@
                             </li>
                             <li>
                                 <a asp-action="index" asp-controller="form">
-                                    <i class="fa fa-book-open"></i>
+                                    <i class="fa fa-book"></i>
                                     Trading Forms
 
                                 </a>
@@ -462,7 +462,7 @@
     <script src="~/UserDashboardStyle/assets/scripts/edit.js"></script>
     <script src="~/UserDashboardStyle/assets/scripts/main.d810cf0ae7f39f28f336.js"></script>
     @RenderSection("Scripts", required: false)
-<script>
+    <script>
         var count = 0
         $(document).ready(function () {
 
@@ -513,8 +513,8 @@
                 }
             });
 
-         
-    }
+
+        }
 
 
 
@@ -544,24 +544,24 @@
 
             count++;
             var ret = `<tr> +
-                            <td>${count}</td>
-                            <td>${strategy.name}</td>
-                            <td>${strategy.description}</td>
-                            <td><a href="../strategy/Editstrategypage/${strategy.strategyID}" class="btn btn-outline-primary">Edit</a>
-                            <a  class="btn btn-outline-danger" 
-                               href="../strategy/delete/${strategy.strategyID}"
-                               onclick="return confirm('Are you sure you want to delete?')">Delete</a>
-                            </td>
-                            </tr>`;
+                                <td>${count}</td>
+                                <td>${strategy.name}</td>
+                                <td>${strategy.description}</td>
+                                <td><a href="../strategy/Editstrategypage/${strategy.strategyID}" class="btn btn-outline-primary">Edit</a>
+                                <a  class="btn btn-outline-danger"
+                                   href="../strategy/delete/${strategy.strategyID}"
+                                   onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                                </td>
+                                </tr>`;
 
 
 
             return ret;
-    }
+        }
 
 
 
-</script>
+    </script>
 
 </body>
 

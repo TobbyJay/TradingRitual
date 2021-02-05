@@ -35,7 +35,7 @@ namespace TradingRitual
             services.AddControllersWithViews();
 
             services.AddDbContextPool<TradingDbContext>(
-             options => options.UseSqlServer(Configuration.GetConnectionString("TradingDB"))
+             options => options.UseSqlServer(Configuration.GetConnectionString("TradingRitualDb"))
            );
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>

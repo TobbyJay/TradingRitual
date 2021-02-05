@@ -30,6 +30,7 @@ namespace TradingRitual.Controllers
         {
             var id = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
             var currentUser = _traderStore.GetAll().FirstOrDefault(u => u.TraderId == Guid.Parse(id));
+
             var getAnalysis = _analysisService.GetAllAnalysis(currentUser.TraderId);
 
             var analysis = new AnalysisViewModel
@@ -74,37 +75,38 @@ namespace TradingRitual.Controllers
 
         public IActionResult EditAnalysis(Guid id)
         {
+            var userid = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
+            var currentUser = _traderStore.GetAll().FirstOrDefault(u => u.TraderId == Guid.Parse(userid));
 
-            List<Strategy> strategy = new List<Strategy>();
 
-            strategy = (from c in _context.Strategies select c).ToList();
+            var strategy = _context.Strategies.Where(s => s.TraderId == currentUser.TraderId).ToList();
             strategy.Insert(0, new Strategy
             {
 
                 Name = "Select a strategy "
             });
+
             ViewBag.Strategies = strategy;
 
 
-            List<ExitStrategy> exitStrategies = new List<ExitStrategy>();
-            exitStrategies = (from c in _context.ExitStrategies select c).ToList();
+            var exitStrategies = _context.ExitStrategies.Where(s => s.TraderId == currentUser.TraderId).ToList();
             exitStrategies.Insert(0, new ExitStrategy
             {
-
                 Name = "Select an exit strategy"
             });
+
             ViewBag.ExitStrategies = exitStrategies;
 
 
-            List<Pair> pairs = new List<Pair>();
-            pairs = (from c in _context.Pairs select c).ToList();
+
+            var pairs = _context.Pairs.Where(s => s.TraderId == currentUser.TraderId).ToList();
             pairs.Insert(0, new Pair
             {
                 Currencies = "Select a pair",
 
-
             });
             ViewBag.Pair = pairs;
+
 
 
             var analysis = _analysisService.GetAnalysis(id);

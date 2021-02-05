@@ -10,8 +10,8 @@ using TradingRitual.Data;
 namespace TradingRitual.Data.Migrations
 {
     [DbContext(typeof(TradingDbContext))]
-    [Migration("20210201004957_UpdateFormsTable")]
-    partial class UpdateFormsTable
+    [Migration("20210204114408_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,8 +50,8 @@ namespace TradingRitual.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a29d4cd0-54f4-4866-9ab5-b3189f595681",
-                            ConcurrencyStamp = "2400e2dd-397d-4fe8-a3ed-8d51145a9424",
+                            Id = "fe1044ef-c9b6-491a-9bfa-d6a0ed1c0263",
+                            ConcurrencyStamp = "d176c73f-3724-422d-8b90-e26e7ae55702",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         });
@@ -144,8 +144,8 @@ namespace TradingRitual.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "d286946a-c070-4ed4-8a0f-b0bb3994e2e3",
-                            RoleId = "a29d4cd0-54f4-4866-9ab5-b3189f595681"
+                            UserId = "a5243f74-152a-41b0-b44c-d5b576f4aa34",
+                            RoleId = "fe1044ef-c9b6-491a-9bfa-d6a0ed1c0263"
                         });
                 });
 
@@ -238,18 +238,18 @@ namespace TradingRitual.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d286946a-c070-4ed4-8a0f-b0bb3994e2e3",
+                            Id = "a5243f74-152a-41b0-b44c-d5b576f4aa34",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2ceda32f-ec38-4e75-9012-688dbbfffd4c",
+                            ConcurrencyStamp = "b261ceff-3b98-4e2a-b43c-5cca84b1f6b9",
                             Email = "admin@tradingritual.com",
                             EmailConfirmed = true,
                             FullName = "ADMIN",
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@tradingritual.com",
                             NormalizedUserName = "admin@tradingritual.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIx6m30Y6ahHeMOdUantk1zDJ8EeiPq5cdUrb0yPMd03hHC+O9B9oj0U+hVGzWM/3Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOTuX5rftwF+g5p7piI10dBZPImP5s71eM62yajfac4Mmiile02dnbrPBpQnOTkzqA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "981cd179-7891-4026-8296-0f64bab8b943",
+                            SecurityStamp = "eeefce53-1795-4c5b-9391-772ee04adb5e",
                             TwoFactorEnabled = false,
                             UserName = "admin@tradingritual.com"
                         });
@@ -337,8 +337,8 @@ namespace TradingRitual.Data.Migrations
                     b.Property<string>("TimeOfTrade")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TradeOutcome")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TradeOutcome")
+                        .HasColumnType("int");
 
                     b.Property<string>("TradeStatus")
                         .HasColumnType("nvarchar(max)");

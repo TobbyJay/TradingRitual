@@ -90,7 +90,7 @@ namespace TradingRitual.Controllers
                     TradingCriteria = model.TradingCriteria,
                     TradingTrend = model.TradingTrend,
                     TraderId  = currentUser.TraderId,
-                    TimeOfTrade = model.TimeOfTrade,
+                    TimeOfTrade = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:tt"),
                     Note = model.Note,
                     TradeOutcome = model.TradeOutcome,
                     TradeStatus = model.TradeStatus
