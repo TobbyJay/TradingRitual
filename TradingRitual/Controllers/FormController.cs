@@ -90,12 +90,13 @@ namespace TradingRitual.Controllers
                     TradingCriteria = model.TradingCriteria,
                     TradingTrend = model.TradingTrend,
                     TraderId  = currentUser.TraderId,
-                    TimeOfTrade = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:tt"),
+                    TimeOfTrade = DateTime.Now.ToString("MM/dd/yyyy h:mm tt"),
                     Note = model.Note,
                     TradeOutcome = model.TradeOutcome,
                     TradeStatus = model.TradeStatus
 
-                    //DateTime.Now.ToString("MM/dd/yyyy h:mm tt")
+                    //  DateTime.Now.ToString("MM/dd/yyyy h:mm tt")
+                    // DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:tt")
                 };
                 _formDataStore.Post(createForm);
             }
