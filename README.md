@@ -1,2 +1,2 @@
 # TradingRitual
-An application that helps to tract Forex trader progress and analysis
+An application that helps to track Forex trader progress and analysis
