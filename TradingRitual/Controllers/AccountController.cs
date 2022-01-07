@@ -110,7 +110,7 @@ namespace TradingRitual.Controllers
                             }
 
                             await _signInManager.SignInAsync(user, false);
-                            return RedirectToAction("index","home");
+                            return RedirectToAction("Account","Login");
                         }
                         else
                         {
